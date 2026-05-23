@@ -1,13 +1,11 @@
 # PlayWait
 
-> AI Vision 기반 매장 대기시간 게임 플랫폼
-> YOLO + MediaPipe로 즐기는 식당/카페 미니게임 10종
+> AI Vision, YOLO + MediaPipe로 즐기는 짜투리 게임
 
 ## 프로젝트 소개
 
-PlayWait는 식당/카페 대기시간을 활용한 **B2B2C AI 게임 플랫폼**입니다.
-고객은 게임을 즐기며 대기하고, 승리 시 매장 할인 쿠폰을 받습니다.
-매장은 체류시간 증대, 메뉴 노출, 고객 데이터를 확보합니다.
+PlayWait는 이동 중, 짜투리 시간에 플레이하기 좋은 **AI 게임 모음**입니다.
+
 
 ## 게임 라인업 (10종)
 
@@ -71,7 +69,7 @@ python -m games.06_rps_evolution.src.game
 
 ## 개발자
 
-- **Stephen (gjkong)** - PinkLAB 로봇 엔지니어
+- **Stephen (gjkong)** 
 - 1인 개발자 (Solo Developer)
 
 ## 라이선스
