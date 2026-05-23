@@ -33,14 +33,14 @@ Date: 2026-05-11 (W5 Step 2)
 # ============================================================
 # 1. 색 상수 — 세련된 8색 팔레트
 # ============================================================
-COLOR_BURGUNDY = "burgundy"      # 🍷 깊은 와인 레드
-COLOR_TERRACOTTA = "terracotta"  # 🍂 흙빛 주황-적
-COLOR_MUSTARD = "mustard"        # 🌻 머스타드 옐로우
-COLOR_SAGE = "sage"              # 🌿 차분한 회녹
-COLOR_NAVY = "navy"              # 🌌 깊은 푸른색
-COLOR_MAUVE = "mauve"            # 💐 부드러운 자주-핑크
-COLOR_CREAM = "cream"            # 🥛 따뜻한 오프화이트
-COLOR_CHARCOAL = "charcoal"      # 🖤 부드러운 검정
+COLOR_BURGUNDY = "burgundy"      # 깊은 와인 레드
+COLOR_TERRACOTTA = "terracotta"  # 흙빛 주황-적
+COLOR_MUSTARD = "mustard"        # 머스타드 옐로우
+COLOR_SAGE = "sage"              # 차분한 회녹
+COLOR_NAVY = "navy"              # 깊은 푸른색
+COLOR_MAUVE = "mauve"            # 부드러운 자주-핑크
+COLOR_CREAM = "cream"            # 따뜻한 오프화이트
+COLOR_CHARCOAL = "charcoal"      # 부드러운 검정
 COLOR_NEUTRAL = "neutral"        # 매칭 안 됨 (분류 결과로만)
 
 ALL_COLORS = (

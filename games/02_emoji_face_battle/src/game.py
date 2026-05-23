@@ -169,7 +169,7 @@ class FaceMirrorGame:
     def setup(self) -> bool:
         self.cap = cv2.VideoCapture(0)
         if not self.cap.isOpened():
-            print("❌ 카메라를 열 수 없습니다.")
+            print("카메라를 열 수 없습니다.")
             print("   sudo fuser -k /dev/video0  ← 잠금 해제 시도")
             self.cap = None
             return False
@@ -178,7 +178,7 @@ class FaceMirrorGame:
         self.cap.set(cv2.CAP_PROP_FRAME_HEIGHT, theme.SCREEN_HEIGHT)
         ok, _ = self.cap.read()
         if not ok:
-            print("❌ 카메라 프레임을 읽을 수 없습니다.")
+            print("카메라 프레임을 읽을 수 없습니다.")
             self.cap.release()
             self.cap = None
             return False
@@ -207,12 +207,12 @@ class FaceMirrorGame:
         if key in (ord('+'), ord('=')):
             self.display_scale = min(3.0, self.display_scale + 0.25)
             self._apply_window_size()
-            print(f"🔍 화면: {self.display_scale:.2f}x")
+            print(f"화면: {self.display_scale:.2f}x")
             return True
         if key in (ord('-'), ord('_')):
             self.display_scale = max(0.5, self.display_scale - 0.25)
             self._apply_window_size()
-            print(f"🔍 화면: {self.display_scale:.2f}x")
+            print(f"화면: {self.display_scale:.2f}x")
             return True
         if key == ord('0'):
             self.display_scale = theme.DISPLAY_SCALE
@@ -231,7 +231,7 @@ class FaceMirrorGame:
                 self.round_state = RoundState(difficulty=self.difficulty)
                 self.sound.play("click")
                 print(
-                    f"🎮 난이도: {theme.DIFFICULTY_KOREAN[self.difficulty]} "
+                    f"난이도: {theme.DIFFICULTY_KOREAN[self.difficulty]} "
                     f"(측정 {self.round_state.get_measure_time():.1f}s, "
                     f"정답 임계 {int(self.round_state.get_correct_threshold()*100)}%)"
                 )
@@ -248,7 +248,7 @@ class FaceMirrorGame:
                 self.round_state.reset()
                 self.last_outcome = None
                 self.current_target = None
-                print("\n🔄 게임 재시작")
+                print("\n게임 재시작")
                 self.phase = GamePhase.DIFFICULTY_SELECT
 
         return True
@@ -308,14 +308,14 @@ class FaceMirrorGame:
         if win:
             self.sound.play("victory")
             print("\n" + "=" * 40)
-            print(f"🏆 우승! 정답 {self.round_state.correct_count}/5  "
+            print(f"우승! 정답 {self.round_state.correct_count}/5  "
                   f"점수 {self.round_state.total_score}/"
                   f"{self.round_state.get_max_score()}")
             print("=" * 40)
         else:
             self.sound.play("lose")
             print("\n" + "=" * 40)
-            print(f"💔 도전 부족: 정답 {self.round_state.correct_count}/5  "
+            print(f"도전 부족: 정답 {self.round_state.correct_count}/5  "
                   f"점수 {self.round_state.total_score}/"
                   f"{self.round_state.get_max_score()}")
             print("=" * 40)
@@ -458,13 +458,13 @@ class FaceMirrorGame:
             cv2.setWindowProperty(self.window_name,
                                   cv2.WND_PROP_FULLSCREEN,
                                   cv2.WINDOW_FULLSCREEN)
-            print("🖥️  전체 화면 ON")
+            print(" 전체 화면 ON")
         else:
             cv2.setWindowProperty(self.window_name,
                                   cv2.WND_PROP_FULLSCREEN,
                                   cv2.WINDOW_NORMAL)
             self._apply_window_size()
-            print("🖥️  전체 화면 OFF")
+            print(" 전체 화면 OFF")
 
     def _apply_window_size(self):
         if self.is_fullscreen:
@@ -481,7 +481,7 @@ class FaceMirrorGame:
             return
 
         print("\n" + "=" * 50)
-        print("😊 PlayWait W4 - 표정 미러링 (Face Mirror)")
+        print("PlayWait W4 - 표정 미러링 (Face Mirror)")
         print("=" * 50)
         print("\n[게임 조작]")
         print("  [1/2/3] 난이도 선택 (쉬움/보통/어려움)")
@@ -538,9 +538,9 @@ class FaceMirrorGame:
                     break
 
         except KeyboardInterrupt:
-            print("\n⚠️  사용자가 Ctrl+C로 중단")
+            print("\n 사용자가 Ctrl+C로 중단")
         except Exception as e:
-            print(f"\n❌ 오류: {e}")
+            print(f"\n오류: {e}")
             import traceback
             traceback.print_exc()
         finally:
@@ -550,13 +550,13 @@ class FaceMirrorGame:
     # 안전 종료 (W1 트러블 #2 패턴)
     # ----------------------------------------
     def cleanup(self):
-        print("\n🧹 리소스 정리 중...")
+        print("\n리소스 정리 중...")
 
         if self.cap is not None:
             try:
                 if self.cap.isOpened():
                     self.cap.release()
-                    print("   ✓ 카메라 해제")
+                    print("   카메라 해제")
             except Exception:
                 pass
             finally:
@@ -565,7 +565,7 @@ class FaceMirrorGame:
         if self.face_mesh is not None:
             try:
                 self.face_mesh.close()
-                print("   ✓ Face Mesh 해제")
+                print("   Face Mesh 해제")
             except Exception:
                 pass
             finally:
@@ -574,7 +574,7 @@ class FaceMirrorGame:
         if self.sound is not None:
             try:
                 self.sound.cleanup()
-                print("   ✓ 사운드 해제")
+                print("   사운드 해제")
             except Exception:
                 pass
 
@@ -582,11 +582,11 @@ class FaceMirrorGame:
             cv2.destroyAllWindows()
             for _ in range(4):
                 cv2.waitKey(1)
-            print("   ✓ 윈도우 닫음")
+            print("   윈도우 닫음")
         except Exception:
             pass
 
-        print("✅ 게임 종료 완료")
+        print("게임 종료 완료")
 
 
 # ============================================================
@@ -596,7 +596,7 @@ _game_instance = None
 
 
 def _signal_handler(signum, frame):
-    print(f"\n⚠️  시그널: {signal.Signals(signum).name}")
+    print(f"\n 시그널: {signal.Signals(signum).name}")
     if _game_instance is not None:
         _game_instance.cleanup()
     sys.exit(0)

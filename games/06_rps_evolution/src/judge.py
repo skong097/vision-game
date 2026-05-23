@@ -7,11 +7,11 @@ W2 이후 코어 모듈로 리팩토링 시 그대로 이동 가능.
 
 승패 매트릭스 (가로가 세로를 이김):
        가위  바위  보  총  불사조
-가위    -    ❌    ✅   ❌    ✅
-바위    ✅    -    ❌   ❌    ✅
-보      ❌    ✅    -   ❌    ❌
-총      ✅    ✅    ✅   -    ❌
-불사조  ❌    ❌    ✅   ✅    -
+가위    -            
+바위       -         
+보            -      
+총              -    
+불사조             -
 
 Author: Stephen (gjkong)
 Date: 2026-04-30
@@ -198,7 +198,7 @@ def _self_test():
     passed = 0
     for user, ai, expected in test_cases:
         actual = judge(user, ai)
-        status = "✅" if actual == expected else "❌"
+        status = "" if actual == expected else ""
         if actual == expected:
             passed += 1
         print(f"  {status} {user:10} vs {ai:10} → {actual:10} (예상: {expected})")
@@ -226,10 +226,10 @@ def _self_test():
               f"{user} vs {ai} → {result['result']} "
               f"(점수 {result['user_score']}:{result['ai_score']})")
         if result["is_game_over"]:
-            print(f"  🏆 게임 종료! 우승자: {result['winner']}")
+            print(f"  게임 종료! 우승자: {result['winner']}")
             break
     
-    print("\n✅ 모든 테스트 완료")
+    print("\n모든 테스트 완료")
 
 
 if __name__ == "__main__":

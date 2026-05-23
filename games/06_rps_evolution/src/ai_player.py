@@ -160,7 +160,7 @@ def _self_test():
             count = counter.get(shape, 0)
             bar = "█" * (count // 20)
             print(f"    {shape:10} {count:4} ({count/10:.1f}%) {bar}")
-        print(f"    👉 rock 카운터(paper+gun) 비율: {counter_rate:.1f}%")
+        print(f"    rock 카운터(paper+gun) 비율: {counter_rate:.1f}%")
     
     # 2. AI vs 랜덤 사용자 시뮬레이션 (사용자 승률 측정)
     print("\n[Test 2] AI vs 랜덤 사용자 1000게임 (사용자 승률)")
@@ -194,7 +194,7 @@ def _self_test():
               f"사용자 {user_wins} | AI {ai_wins} | 무승부 {draws}")
         print(f"          무승부 제외 사용자 승률: {win_rate:.1f}%")
     
-    print("\n✅ 모든 테스트 완료")
+    print("\n모든 테스트 완료")
 
 
 if __name__ == "__main__":

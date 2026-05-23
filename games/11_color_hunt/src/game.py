@@ -151,7 +151,7 @@ class ColorHuntGame:
     def setup(self) -> bool:
         self.cap = cv2.VideoCapture(0)
         if not self.cap.isOpened():
-            print("❌ 카메라를 열 수 없습니다.")
+            print("카메라를 열 수 없습니다.")
             print("   sudo fuser -k /dev/video0  ← 잠금 해제 시도")
             self.cap = None
             return False
@@ -160,7 +160,7 @@ class ColorHuntGame:
         self.cap.set(cv2.CAP_PROP_FRAME_HEIGHT, theme.SCREEN_HEIGHT)
         ok, _ = self.cap.read()
         if not ok:
-            print("❌ 카메라 프레임을 읽을 수 없습니다.")
+            print("카메라 프레임을 읽을 수 없습니다.")
             self.cap.release()
             self.cap = None
             return False
@@ -186,12 +186,12 @@ class ColorHuntGame:
         if key in (ord('+'), ord('=')):
             self.display_scale = min(3.0, self.display_scale + 0.25)
             self._apply_window_size()
-            print(f"🔍 화면: {self.display_scale:.2f}x")
+            print(f"화면: {self.display_scale:.2f}x")
             return True
         if key in (ord('-'), ord('_')):
             self.display_scale = max(0.5, self.display_scale - 0.25)
             self._apply_window_size()
-            print(f"🔍 화면: {self.display_scale:.2f}x")
+            print(f"화면: {self.display_scale:.2f}x")
             return True
         if key == ord('0'):
             self.display_scale = theme.DISPLAY_SCALE
@@ -216,7 +216,7 @@ class ColorHuntGame:
                     self.mission.target_color, "??"
                 )
                 print(
-                    f"🎮 난이도: {theme.DIFFICULTY_KOREAN[self.difficulty]} | "
+                    f"난이도: {theme.DIFFICULTY_KOREAN[self.difficulty]} | "
                     f"미션: {color_kr} {self.mission.goal_count}개 / "
                     f"{int(self.mission.time_limit)}초 / 게이트 "
                     f"{int(self.mission.confidence_gate*100)}%"
@@ -234,7 +234,7 @@ class ColorHuntGame:
                 self.flashes.clear()
                 self.mission = None
                 self.tracker = None
-                print("\n🔄 재시작")
+                print("\n재시작")
                 self.phase = GamePhase.DIFFICULTY_SELECT
 
         return True
@@ -255,14 +255,14 @@ class ColorHuntGame:
         if end == END_WIN:
             self.sound.play(theme.HUNT_VICTORY_SOUND)
             print("\n" + "=" * 40)
-            print(f"🏆 성공! {self.tracker.collected}/"
+            print(f"성공! {self.tracker.collected}/"
                   f"{self.mission.goal_count}개 수집  "
                   f"(남은 {self.tracker.get_remaining():.1f}s)")
             print("=" * 40)
         else:
             self.sound.play(theme.HUNT_LOSE_SOUND)
             print("\n" + "=" * 40)
-            print(f"💔 시간 초과: {self.tracker.collected}/"
+            print(f"시간 초과: {self.tracker.collected}/"
                   f"{self.mission.goal_count}개 수집")
             print("=" * 40)
         self.phase = GamePhase.GAME_OVER
@@ -296,7 +296,7 @@ class ColorHuntGame:
                     })
                     break
             self.sound.play(theme.HUNT_MATCH_SOUND)
-            print(f"  ✨ +{gained} → 총 {self.tracker.collected}/"
+            print(f"  +{gained} → 총 {self.tracker.collected}/"
                   f"{self.mission.goal_count}")
 
         # 만료된 플래시 제거
@@ -368,13 +368,13 @@ class ColorHuntGame:
             cv2.setWindowProperty(self.window_name,
                                   cv2.WND_PROP_FULLSCREEN,
                                   cv2.WINDOW_FULLSCREEN)
-            print("🖥️  전체 화면 ON")
+            print(" 전체 화면 ON")
         else:
             cv2.setWindowProperty(self.window_name,
                                   cv2.WND_PROP_FULLSCREEN,
                                   cv2.WINDOW_NORMAL)
             self._apply_window_size()
-            print("🖥️  전체 화면 OFF")
+            print(" 전체 화면 OFF")
 
     def _apply_window_size(self):
         if self.is_fullscreen:
@@ -391,7 +391,7 @@ class ColorHuntGame:
             return
 
         print("\n" + "=" * 50)
-        print("🎨 PlayWait W5 - 컬러 헌트 (Color Hunt)")
+        print("PlayWait W5 - 컬러 헌트 (Color Hunt)")
         print("=" * 50)
         print("\n[게임 조작]")
         print("  [1/2/3] 난이도 (쉬움/보통/어려움)")
@@ -444,9 +444,9 @@ class ColorHuntGame:
                     break
 
         except KeyboardInterrupt:
-            print("\n⚠️  사용자가 Ctrl+C로 중단")
+            print("\n 사용자가 Ctrl+C로 중단")
         except Exception as e:
-            print(f"\n❌ 오류: {e}")
+            print(f"\n오류: {e}")
             import traceback
             traceback.print_exc()
         finally:
@@ -456,13 +456,13 @@ class ColorHuntGame:
     # 안전 종료 (W1 트러블 #2 패턴)
     # ----------------------------------------
     def cleanup(self):
-        print("\n🧹 리소스 정리 중...")
+        print("\n리소스 정리 중...")
 
         if self.cap is not None:
             try:
                 if self.cap.isOpened():
                     self.cap.release()
-                    print("   ✓ 카메라 해제")
+                    print("   카메라 해제")
             except Exception:
                 pass
             finally:
@@ -472,14 +472,14 @@ class ColorHuntGame:
             try:
                 # YOLO 모델은 ultralytics가 알아서 정리 — 참조만 끊음
                 self.engine = None
-                print("   ✓ YOLO 엔진 참조 해제")
+                print("   YOLO 엔진 참조 해제")
             except Exception:
                 pass
 
         if self.sound is not None:
             try:
                 self.sound.cleanup()
-                print("   ✓ 사운드 해제")
+                print("   사운드 해제")
             except Exception:
                 pass
 
@@ -487,11 +487,11 @@ class ColorHuntGame:
             cv2.destroyAllWindows()
             for _ in range(4):
                 cv2.waitKey(1)
-            print("   ✓ 윈도우 닫음")
+            print("   윈도우 닫음")
         except Exception:
             pass
 
-        print("✅ 게임 종료 완료")
+        print("게임 종료 완료")
 
 
 # ============================================================
@@ -501,7 +501,7 @@ _game_instance = None
 
 
 def _signal_handler(signum, frame):
-    print(f"\n⚠️  시그널: {signal.Signals(signum).name}")
+    print(f"\n 시그널: {signal.Signals(signum).name}")
     if _game_instance is not None:
         _game_instance.cleanup()
     sys.exit(0)

@@ -154,15 +154,15 @@ def _self_test():
     has_consecutive = any(questions[i] == questions[i+1] 
                            for i in range(len(questions)-1))
     if has_consecutive:
-        print("  ❌ 직전 숫자 회피 실패")
+        print("  직전 숫자 회피 실패")
     else:
-        print("  ✅ 직전 숫자 회피 정상")
+        print("  직전 숫자 회피 정상")
     
     # 범위 검증
     if all(1 <= q <= 10 for q in questions):
-        print("  ✅ 범위 (1~10) 정상")
+        print("  범위 (1~10) 정상")
     else:
-        print("  ❌ 범위 벗어남")
+        print("  범위 벗어남")
     
     # 2. 시간 계산 테스트
     print("\n[Test 2] 가속 시간 계산")
@@ -189,7 +189,7 @@ def _self_test():
         bar = "█" * (count // 50)
         print(f"  {n:2}: {count:5} ({diff_pct:+.1f}%) {bar}")
     
-    print("\n✅ 모든 테스트 완료")
+    print("\n모든 테스트 완료")
 
 
 if __name__ == "__main__":

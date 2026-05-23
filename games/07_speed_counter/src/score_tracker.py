@@ -189,9 +189,9 @@ def _self_test():
               f"종료: {result}")
     
     if st.is_win():
-        print(f"  ✅ 승리! 최고 콤보: {st.max_combo}")
+        print(f"  승리! 최고 콤보: {st.max_combo}")
     else:
-        print(f"  ❌ 승리 판정 실패")
+        print(f"  승리 판정 실패")
     
     # 시나리오 2: 오답 5회 → 패배
     print("\n[Test 2] 오답 5회 시나리오")
@@ -205,9 +205,9 @@ def _self_test():
               f"종료: {result}")
     
     if st.check_end() == END_TOO_MANY_FAILS:
-        print(f"  ✅ 오답 누적 패배 정상")
+        print(f"  오답 누적 패배 정상")
     else:
-        print(f"  ❌ 오답 누적 판정 실패")
+        print(f"  오답 누적 판정 실패")
     
     # 시나리오 3: 정답/오답 혼합 (콤보 끊김)
     print("\n[Test 3] 정답/오답 혼합 (콤보 끊김)")
@@ -234,9 +234,9 @@ def _self_test():
     time.sleep(0.6)
     result = st.check_end()
     if result == END_TIMEOUT:
-        print(f"  ✅ 시간 초과 정상 ({st.get_elapsed():.2f}s)")
+        print(f"  시간 초과 정상 ({st.get_elapsed():.2f}s)")
     else:
-        print(f"  ❌ 시간 초과 미감지: {result}")
+        print(f"  시간 초과 미감지: {result}")
     
     ScoreTracker.TIME_LIMIT = 60.0  # 원복
     
@@ -250,7 +250,7 @@ def _self_test():
     summary = st.get_summary()
     print(f"  요약: {summary}")
     
-    print("\n✅ 모든 테스트 완료")
+    print("\n모든 테스트 완료")
 
 
 if __name__ == "__main__":

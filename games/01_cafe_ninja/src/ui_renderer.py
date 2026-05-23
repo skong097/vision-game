@@ -57,10 +57,10 @@ def find_korean_font():
 KOREAN_FONT_PATH = find_korean_font()
 
 if KOREAN_FONT_PATH is None:
-    print("⚠️  한글 폰트를 찾을 수 없습니다.")
+    print(" 한글 폰트를 찾을 수 없습니다.")
     print("   Linux: sudo apt install fonts-nanum")
 else:
-    print(f"✅ 한글 폰트 로드: {KOREAN_FONT_PATH}")
+    print(f"한글 폰트 로드: {KOREAN_FONT_PATH}")
 
 
 # ============================================================
@@ -563,7 +563,7 @@ def draw_user_count_indicator(frame, current_total, target,
         r_str = str(right_count) if right_count is not None else "-"
         
         if current_total == target:
-            text = f"YOU: {l_str} + {r_str} = {current_total} ✓"
+            text = f"YOU: {l_str} + {r_str} = {current_total} "
             color = theme.COLOR_WIN
         else:
             text = f"YOU: {l_str} + {r_str} = {current_total}"
@@ -925,7 +925,7 @@ def draw_ninja_score_bar(frame, score: int, target: int, lives: int,
     draw_text_korean(frame, "생명", (heart_x, 8),
                       theme.FONT_SIZE_SMALL, theme.COLOR_GRAY_LIGHT,
                       anchor="mt")
-    hearts = "♥" * lives + "♡" * (max_lives - lives)
+    hearts = "" * lives + "" * (max_lives - lives)
     heart_color = theme.COLOR_LOSE if lives <= 1 else theme.PINKLAB_PINK
     draw_text_korean(frame, hearts, (heart_x, 28),
                       theme.FONT_SIZE_LARGE, heart_color, anchor="mt")

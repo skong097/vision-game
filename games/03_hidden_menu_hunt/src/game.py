@@ -152,7 +152,7 @@ class HiddenMenuHuntGame:
     def setup(self) -> bool:
         self.cap = cv2.VideoCapture(0)
         if not self.cap.isOpened():
-            print("❌ 카메라를 열 수 없습니다.")
+            print("카메라를 열 수 없습니다.")
             print("   sudo fuser -k /dev/video0")
             self.cap = None
             return False
@@ -161,7 +161,7 @@ class HiddenMenuHuntGame:
         self.cap.set(cv2.CAP_PROP_FRAME_HEIGHT, theme.SCREEN_HEIGHT)
         ok, _ = self.cap.read()
         if not ok:
-            print("❌ 카메라 프레임을 읽을 수 없습니다.")
+            print("카메라 프레임을 읽을 수 없습니다.")
             self.cap.release()
             self.cap = None
             return False
@@ -186,12 +186,12 @@ class HiddenMenuHuntGame:
         if key in (ord('+'), ord('=')):
             self.display_scale = min(3.0, self.display_scale + 0.25)
             self._apply_window_size()
-            print(f"🔍 화면: {self.display_scale:.2f}x")
+            print(f"화면: {self.display_scale:.2f}x")
             return True
         if key in (ord('-'), ord('_')):
             self.display_scale = max(0.5, self.display_scale - 0.25)
             self._apply_window_size()
-            print(f"🔍 화면: {self.display_scale:.2f}x")
+            print(f"화면: {self.display_scale:.2f}x")
             return True
         if key == ord('0'):
             self.display_scale = theme.DISPLAY_SCALE
@@ -210,7 +210,7 @@ class HiddenMenuHuntGame:
                 self.state = TreasureState(difficulty=self.difficulty)
                 self.sound.play("click")
                 print(
-                    f"🎮 난이도: {theme.DIFFICULTY_KOREAN[self.difficulty]} | "
+                    f"난이도: {theme.DIFFICULTY_KOREAN[self.difficulty]} | "
                     f"목표 {self.state.get_goal()}개, "
                     f"유지 {self.state.get_hold_required():.1f}s"
                 )
@@ -232,7 +232,7 @@ class HiddenMenuHuntGame:
                 self.sound.play("click")
                 self.state.reset()
                 self.find_flash_until = 0.0
-                print("\n🔄 게임 재시작")
+                print("\n게임 재시작")
                 self.phase = GamePhase.DIFFICULTY_SELECT
 
         return True
@@ -276,11 +276,11 @@ class HiddenMenuHuntGame:
             self.sound.play(theme.TREASURE_FIND_SOUND)
             new_target_ko = (self.state.current_target.ko
                              if self.state.current_target else "??")
-            print(f"  ✨ 발견! {self.last_find_ko} (+{SCORE_PER_FIND}점) "
+            print(f"  발견! {self.last_find_ko} (+{SCORE_PER_FIND}점) "
                   f"→ 누적 {self.state.score}점, "
                   f"{self.state.found_count}/{self.state.get_goal()}")
             if self.state.is_win():
-                print(f"  → 🏆 목표 달성!")
+                print(f"  → 목표 달성!")
             else:
                 print(f"  → 다음 보물: {new_target_ko}")
 
@@ -291,7 +291,7 @@ class HiddenMenuHuntGame:
                 self.sound.play(theme.TREASURE_VICTORY_SOUND)
                 summary = self.state.get_summary()
                 print(f"\n{'='*40}")
-                print(f"🏆 보물 발견 성공! "
+                print(f"보물 발견 성공! "
                       f"{summary['found_count']}/{summary['goal']}  "
                       f"({summary['score']}점, 시간 보너스 "
                       f"{summary['time_bonus']}점 포함)")
@@ -299,7 +299,7 @@ class HiddenMenuHuntGame:
             else:
                 self.sound.play(theme.TREASURE_LOSE_SOUND)
                 print(f"\n{'='*40}")
-                print(f"💔 시간 초과: "
+                print(f"시간 초과: "
                       f"{self.state.found_count}/{self.state.get_goal()} 발견")
                 print(f"{'='*40}")
             self.phase = GamePhase.GAME_OVER
@@ -384,13 +384,13 @@ class HiddenMenuHuntGame:
             cv2.setWindowProperty(self.window_name,
                                   cv2.WND_PROP_FULLSCREEN,
                                   cv2.WINDOW_FULLSCREEN)
-            print("🖥️  전체 화면 ON")
+            print(" 전체 화면 ON")
         else:
             cv2.setWindowProperty(self.window_name,
                                   cv2.WND_PROP_FULLSCREEN,
                                   cv2.WINDOW_NORMAL)
             self._apply_window_size()
-            print("🖥️  전체 화면 OFF")
+            print(" 전체 화면 OFF")
 
     def _apply_window_size(self):
         if self.is_fullscreen:
@@ -407,7 +407,7 @@ class HiddenMenuHuntGame:
             return
 
         print("\n" + "=" * 50)
-        print("🔍 PlayWait W10 - AR 보물찾기 (Hidden Menu Hunt)")
+        print("PlayWait W10 - AR 보물찾기 (Hidden Menu Hunt)")
         print("=" * 50)
         print("\n[게임 조작]")
         print("  [1/2/3] 난이도 (쉬움/보통/어려움)")
@@ -467,9 +467,9 @@ class HiddenMenuHuntGame:
                     break
 
         except KeyboardInterrupt:
-            print("\n⚠️  사용자가 Ctrl+C로 중단")
+            print("\n 사용자가 Ctrl+C로 중단")
         except Exception as e:
-            print(f"\n❌ 오류: {e}")
+            print(f"\n오류: {e}")
             import traceback
             traceback.print_exc()
         finally:
@@ -479,13 +479,13 @@ class HiddenMenuHuntGame:
     # 안전 종료
     # ----------------------------------------
     def cleanup(self):
-        print("\n🧹 리소스 정리 중...")
+        print("\n리소스 정리 중...")
 
         if self.cap is not None:
             try:
                 if self.cap.isOpened():
                     self.cap.release()
-                    print("   ✓ 카메라 해제")
+                    print("   카메라 해제")
             except Exception:
                 pass
             finally:
@@ -494,14 +494,14 @@ class HiddenMenuHuntGame:
         if self.engine is not None:
             try:
                 self.engine = None
-                print("   ✓ YOLO 엔진 참조 해제")
+                print("   YOLO 엔진 참조 해제")
             except Exception:
                 pass
 
         if self.sound is not None:
             try:
                 self.sound.cleanup()
-                print("   ✓ 사운드 해제")
+                print("   사운드 해제")
             except Exception:
                 pass
 
@@ -509,11 +509,11 @@ class HiddenMenuHuntGame:
             cv2.destroyAllWindows()
             for _ in range(4):
                 cv2.waitKey(1)
-            print("   ✓ 윈도우 닫음")
+            print("   윈도우 닫음")
         except Exception:
             pass
 
-        print("✅ 게임 종료 완료")
+        print("게임 종료 완료")
 
 
 # ============================================================
@@ -523,7 +523,7 @@ _game_instance = None
 
 
 def _signal_handler(signum, frame):
-    print(f"\n⚠️  시그널: {signal.Signals(signum).name}")
+    print(f"\n 시그널: {signal.Signals(signum).name}")
     if _game_instance is not None:
         _game_instance.cleanup()
     sys.exit(0)

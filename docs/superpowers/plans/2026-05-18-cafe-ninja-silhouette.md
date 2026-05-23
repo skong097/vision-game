@@ -257,13 +257,13 @@ class NinjaSilhouette:
         try:
             self._seg = _build_selfie_segmentation(model_selection=seg_model)
         except Exception as e:
-            print(f"⚠️ Selfie Segmentation 빌드 실패: {e} — silhouette 비활성, spotlight 폴백")
+            print(f"Selfie Segmentation 빌드 실패: {e} — silhouette 비활성, spotlight 폴백")
             return  # available=False 유지
 
         try:
             self._fd = _build_face_detection(model_selection=face_model, min_confidence=min_face_confidence)
         except Exception as e:
-            print(f"⚠️ Face Detection 빌드 실패: {e} — 눈 reveal 비활성")
+            print(f"Face Detection 빌드 실패: {e} — 눈 reveal 비활성")
             self._fd = None
 
         self.available = True
@@ -864,9 +864,9 @@ git commit -m "feat(cafe-ninja): apply_silhouette hand/eye reveal with mask clip
 ```python
         self.silhouette = NinjaSilhouette()
         if self.silhouette.available:
-            print("🥷 Silhouette 활성 (Selfie Seg + Face Detection)")
+            print("Silhouette 활성 (Selfie Seg + Face Detection)")
         else:
-            print("⚠️ Silhouette 비활성 — spotlight 폴백")
+            print("Silhouette 비활성 — spotlight 폴백")
 ```
 
 메모리 규칙 `feedback-init-must-define-all-attrs`에 따라 `self.silhouette`은 반드시 `__init__`에서 초기화 — 위 한 줄이 default 보장.
@@ -979,7 +979,7 @@ Expected: 678+ cases 모두 PASS, 회귀 0건.
 Run: `.venv/bin/python -m games.01_cafe_ninja.src.game`
 
 체크 항목:
-- 시작 시 `🥷 Silhouette 활성` 로그 출력
+- 시작 시 `Silhouette 활성` 로그 출력
 - 사람 등장 전: 배경(town.jpg)만 보임 (그림자 X)
 - 사람 정면: 자주톤 평면 실루엣 + 양 눈 작은 원 카메라 노출 + 손 영역 카메라 노출
 - 사람 측면: 눈 reveal 사라짐, 사람 그림자만 (자연스러움)

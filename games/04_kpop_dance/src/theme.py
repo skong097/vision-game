@@ -47,7 +47,7 @@ SCREEN_HEIGHT = 480
 
 # 화면 표시 확대 배율 (카메라 입력은 그대로, 보여주는 것만 확대)
 # 1.0 = 640x480 (작음)
-# 1.5 = 960x720 (적당) ⭐ 추천
+# 1.5 = 960x720 (적당) 추천
 # 2.0 = 1280x960 (큼)
 # 2.5 = 1600x1200 (매우 큼)
 DISPLAY_SCALE = 1.5
@@ -89,20 +89,20 @@ SHAPE_KOREAN = {
 }
 
 SHAPE_EMOJI = {
-    "rock": "✊",
-    "scissors": "✌️",
-    "paper": "🖐️",
-    "gun": "👉",
-    "phoenix": "🤟",
-    "unknown": "❓",
+    "rock": "",
+    "scissors": "",
+    "paper": "",
+    "gun": "",
+    "phoenix": "",
+    "unknown": "",
 }
 
 SHAPE_KOREAN_FULL = {
-    "rock": "바위 ✊",
-    "scissors": "가위 ✌️",
-    "paper": "보 🖐️",
-    "gun": "총 👉",
-    "phoenix": "불사조 🤟",
+    "rock": "바위 ",
+    "scissors": "가위 ",
+    "paper": "보 ",
+    "gun": "총 ",
+    "phoenix": "불사조 ",
     "unknown": "??",
 }
 

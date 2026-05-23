@@ -196,7 +196,7 @@ def _self_test():
 
     cap = cv2.VideoCapture(0)
     if not cap.isOpened():
-        print("❌ 카메라를 열 수 없습니다.")
+        print("카메라를 열 수 없습니다.")
         return
     cap.set(cv2.CAP_PROP_FRAME_WIDTH, 640)
     cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 480)
@@ -279,7 +279,7 @@ def _self_test():
 
     cap.release()
     cv2.destroyAllWindows()
-    print("\n✅ 종료")
+    print("\n종료")
 
 
 if __name__ == "__main__":

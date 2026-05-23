@@ -1,30 +1,30 @@
-# 🎮 PlayWait
+# PlayWait
 
 > AI Vision 기반 매장 대기시간 게임 플랫폼
 > YOLO + MediaPipe로 즐기는 식당/카페 미니게임 10종
 
-## 📌 프로젝트 소개
+## 프로젝트 소개
 
 PlayWait는 식당/카페 대기시간을 활용한 **B2B2C AI 게임 플랫폼**입니다.
 고객은 게임을 즐기며 대기하고, 승리 시 매장 할인 쿠폰을 받습니다.
 매장은 체류시간 증대, 메뉴 노출, 고객 데이터를 확보합니다.
 
-## 🎯 게임 라인업 (10종)
+## 게임 라인업 (10종)
 
 | # | 게임명 | 기술 | 난이도 |
 |---|--------|------|--------|
-| 1 | 카페 닌자 | MediaPipe Hands + YOLO | ⭐⭐⭐ |
-| 2 | 표정 미러링 챌린지 | MediaPipe Face Mesh | ⭐⭐⭐ |
-| 3 | AR 보물찾기 | YOLO + AR | ⭐⭐⭐⭐⭐ |
-| 4 | K-Pop 랜덤 댄스 | MediaPipe Pose | ⭐⭐⭐⭐ |
-| 5 | 고요 속의 외침 | Pose + Hands + LLM | ⭐⭐⭐⭐⭐ |
-| 6 | 가위바위보 진화 | MediaPipe Hands | ⭐ |
-| 7 | 스피드 카운터 | MediaPipe Hands | ⭐⭐ |
-| 8 | 좀비 피하기 (할로윈) | Pose + YOLO | ⭐⭐⭐⭐ |
-| 9 | 산타 선물 받기 (X-mas) | MediaPipe Hands | ⭐⭐⭐ |
-| 10 | 커플 싱크 (발렌타인) | Face + Pose 멀티 | ⭐⭐⭐⭐ |
+| 1 | 카페 닌자 | MediaPipe Hands + YOLO | |
+| 2 | 표정 미러링 챌린지 | MediaPipe Face Mesh | |
+| 3 | AR 보물찾기 | YOLO + AR | |
+| 4 | K-Pop 랜덤 댄스 | MediaPipe Pose | |
+| 5 | 고요 속의 외침 | Pose + Hands + LLM | |
+| 6 | 가위바위보 진화 | MediaPipe Hands | |
+| 7 | 스피드 카운터 | MediaPipe Hands | |
+| 8 | 좀비 피하기 (할로윈) | Pose + YOLO | |
+| 9 | 산타 선물 받기 (X-mas) | MediaPipe Hands | |
+| 10 | 커플 싱크 (발렌타인) | Face + Pose 멀티 | |
 
-## 🏗️ 디렉토리 구조
+## 디렉토리 구조
 
 ```
 PlayWait/
@@ -41,7 +41,7 @@ PlayWait/
 └── assets/            # 공통 리소스 (이미지, 사운드, 모델)
 ```
 
-## 🚀 빠른 시작
+## 빠른 시작
 
 ```bash
 # 가상환경 생성
@@ -55,12 +55,12 @@ pip install -r requirements.txt
 python -m games.06_rps_evolution.src.game
 ```
 
-## 📅 개발 로드맵
+## 개발 로드맵
 
 10주 계획. 매주 1게임씩 개발.
 자세한 일정은 `docs/design/roadmap.md` 참고.
 
-## 🛠️ 기술 스택
+## 기술 스택
 
 - **Python 3.12**
 - **MediaPipe** (Hands, Pose, Face Mesh)
@@ -69,11 +69,11 @@ python -m games.06_rps_evolution.src.game
 - **OpenCV** (영상 처리)
 - **PWA** (프론트엔드)
 
-## 👤 개발자
+## 개발자
 
 - **Stephen (gjkong)** - PinkLAB 로봇 엔지니어
 - 1인 개발자 (Solo Developer)
 
-## 📄 라이선스
+## 라이선스
 
 MIT License — 자세한 내용은 [LICENSE](LICENSE) 파일 참고.

@@ -184,7 +184,7 @@ def _self_test():
     
     cap = cv2.VideoCapture(0)
     if not cap.isOpened():
-        print("\n❌ 카메라를 열 수 없습니다.")
+        print("\n카메라를 열 수 없습니다.")
         return
     
     cap.set(cv2.CAP_PROP_FRAME_WIDTH, 640)
@@ -200,7 +200,7 @@ def _self_test():
         model_complexity=1,
         min_detection_confidence=0.7,
         min_tracking_confidence=0.5,
-        max_num_hands=2,  # ★ W2 핵심: 두 손
+        max_num_hands=2,  # W2 핵심: 두 손
     ) as hands:
         
         while cap.isOpened():
@@ -223,7 +223,7 @@ def _self_test():
             
             # 변경 시 콘솔 출력
             if (confirmed is not None and confirmed != last_printed):
-                print(f"  ✋ 합계: {confirmed}  "
+                print(f"  합계: {confirmed}  "
                       f"(왼손 {count_result['left']}, 오른손 {count_result['right']})")
                 last_printed = confirmed
             
@@ -312,7 +312,7 @@ def _self_test():
     
     cap.release()
     cv2.destroyAllWindows()
-    print("\n✅ 종료")
+    print("\n종료")
 
 
 if __name__ == "__main__":

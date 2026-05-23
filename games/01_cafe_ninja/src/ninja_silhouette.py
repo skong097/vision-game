@@ -54,13 +54,13 @@ class NinjaSilhouette:
         try:
             self._seg = _build_selfie_segmentation(model_selection=seg_model)
         except Exception as e:
-            print(f"⚠️ Selfie Segmentation 빌드 실패: {e} — silhouette 비활성, spotlight 폴백")
+            print(f"Selfie Segmentation 빌드 실패: {e} — silhouette 비활성, spotlight 폴백")
             return  # available=False 유지
 
         try:
             self._fd = _build_face_detection(model_selection=face_model, min_confidence=min_face_confidence)
         except Exception as e:
-            print(f"⚠️ Face Detection 빌드 실패: {e} — 눈 reveal 비활성")
+            print(f"Face Detection 빌드 실패: {e} — 눈 reveal 비활성")
             self._fd = None
 
         self.available = True

@@ -159,7 +159,7 @@ class CoupleSyncGame:
     def setup(self) -> bool:
         self.cap = cv2.VideoCapture(0)
         if not self.cap.isOpened():
-            print("❌ 카메라를 열 수 없습니다.")
+            print("카메라를 열 수 없습니다.")
             print("   sudo fuser -k /dev/video0")
             self.cap = None
             return False
@@ -168,7 +168,7 @@ class CoupleSyncGame:
         self.cap.set(cv2.CAP_PROP_FRAME_HEIGHT, theme.SCREEN_HEIGHT)
         ok, _ = self.cap.read()
         if not ok:
-            print("❌ 카메라 프레임을 읽을 수 없습니다.")
+            print("카메라 프레임을 읽을 수 없습니다.")
             self.cap.release()
             self.cap = None
             return False
@@ -204,12 +204,12 @@ class CoupleSyncGame:
         if key in (ord('+'), ord('=')):
             self.display_scale = min(3.0, self.display_scale + 0.25)
             self._apply_window_size()
-            print(f"🔍 화면: {self.display_scale:.2f}x")
+            print(f"화면: {self.display_scale:.2f}x")
             return True
         if key in (ord('-'), ord('_')):
             self.display_scale = max(0.5, self.display_scale - 0.25)
             self._apply_window_size()
-            print(f"🔍 화면: {self.display_scale:.2f}x")
+            print(f"화면: {self.display_scale:.2f}x")
             return True
         if key == ord('0'):
             self.display_scale = theme.DISPLAY_SCALE
@@ -229,7 +229,7 @@ class CoupleSyncGame:
                 self.last_sync_result = None
                 self.sound.play("click")
                 print(
-                    f"🎮 난이도: {theme.DIFFICULTY_KOREAN[self.difficulty]} | "
+                    f"난이도: {theme.DIFFICULTY_KOREAN[self.difficulty]} | "
                     f"매칭 임계 {int(self.state.get_match_threshold()*100)}%, "
                     f"유지 {self.state.get_hold_required():.1f}s, "
                     f"목표 {self.state.target_score}점"
@@ -252,7 +252,7 @@ class CoupleSyncGame:
                 self.last_sync_result = None
                 self.last_left_pose = None
                 self.last_right_pose = None
-                print("\n🔄 게임 재시작")
+                print("\n게임 재시작")
                 self.phase = GamePhase.DIFFICULTY_SELECT
 
         return True
@@ -329,7 +329,7 @@ class CoupleSyncGame:
             self.sound.play(theme.SYNC_COMPLETION_SOUND)
             kor = theme.POSE_KOREAN.get(self.state.current_mission, "??")
             bonus_str = " (보너스!)" if sync_result.bonus else ""
-            print(f"  ✨ 미션 완료{bonus_str}! 다음: {kor}  "
+            print(f"  미션 완료{bonus_str}! 다음: {kor}  "
                   f"→ {self.state.score}/{self.state.target_score}점")
 
         # 종료 체크
@@ -338,7 +338,7 @@ class CoupleSyncGame:
             if end == END_WIN:
                 self.sound.play(theme.SYNC_VICTORY_SOUND)
                 print(f"\n{'='*40}")
-                print(f"🏆 성공! 점수 {self.state.score}/"
+                print(f"성공! 점수 {self.state.score}/"
                       f"{self.state.target_score}, "
                       f"완료 {self.state.completions}회, "
                       f"보너스 {self.state.bonus_count}회")
@@ -346,7 +346,7 @@ class CoupleSyncGame:
             else:
                 self.sound.play(theme.SYNC_LOSE_SOUND)
                 print(f"\n{'='*40}")
-                print(f"💔 시간 초과: {self.state.score}/"
+                print(f"시간 초과: {self.state.score}/"
                       f"{self.state.target_score}점")
                 print(f"{'='*40}")
             self.phase = GamePhase.GAME_OVER
@@ -458,13 +458,13 @@ class CoupleSyncGame:
             cv2.setWindowProperty(self.window_name,
                                   cv2.WND_PROP_FULLSCREEN,
                                   cv2.WINDOW_FULLSCREEN)
-            print("🖥️  전체 화면 ON")
+            print(" 전체 화면 ON")
         else:
             cv2.setWindowProperty(self.window_name,
                                   cv2.WND_PROP_FULLSCREEN,
                                   cv2.WINDOW_NORMAL)
             self._apply_window_size()
-            print("🖥️  전체 화면 OFF")
+            print(" 전체 화면 OFF")
 
     def _apply_window_size(self):
         if self.is_fullscreen:
@@ -481,7 +481,7 @@ class CoupleSyncGame:
             return
 
         print("\n" + "=" * 50)
-        print("💕 PlayWait W8 - 커플 싱크 (Couple Sync)")
+        print("PlayWait W8 - 커플 싱크 (Couple Sync)")
         print("=" * 50)
         print("\n[게임 조작]")
         print("  [1/2/3] 난이도 (쉬움/보통/어려움)")
@@ -538,9 +538,9 @@ class CoupleSyncGame:
                     break
 
         except KeyboardInterrupt:
-            print("\n⚠️  사용자가 Ctrl+C로 중단")
+            print("\n 사용자가 Ctrl+C로 중단")
         except Exception as e:
-            print(f"\n❌ 오류: {e}")
+            print(f"\n오류: {e}")
             import traceback
             traceback.print_exc()
         finally:
@@ -550,13 +550,13 @@ class CoupleSyncGame:
     # 안전 종료 (Pose 두 인스턴스)
     # ----------------------------------------
     def cleanup(self):
-        print("\n🧹 리소스 정리 중...")
+        print("\n리소스 정리 중...")
 
         if self.cap is not None:
             try:
                 if self.cap.isOpened():
                     self.cap.release()
-                    print("   ✓ 카메라 해제")
+                    print("   카메라 해제")
             except Exception:
                 pass
             finally:
@@ -565,7 +565,7 @@ class CoupleSyncGame:
         if self.pose_left is not None:
             try:
                 self.pose_left.close()
-                print("   ✓ Pose(좌) 해제")
+                print("   Pose(좌) 해제")
             except Exception:
                 pass
             finally:
@@ -573,7 +573,7 @@ class CoupleSyncGame:
         if self.pose_right is not None:
             try:
                 self.pose_right.close()
-                print("   ✓ Pose(우) 해제")
+                print("   Pose(우) 해제")
             except Exception:
                 pass
             finally:
@@ -582,7 +582,7 @@ class CoupleSyncGame:
         if self.sound is not None:
             try:
                 self.sound.cleanup()
-                print("   ✓ 사운드 해제")
+                print("   사운드 해제")
             except Exception:
                 pass
 
@@ -590,11 +590,11 @@ class CoupleSyncGame:
             cv2.destroyAllWindows()
             for _ in range(4):
                 cv2.waitKey(1)
-            print("   ✓ 윈도우 닫음")
+            print("   윈도우 닫음")
         except Exception:
             pass
 
-        print("✅ 게임 종료 완료")
+        print("게임 종료 완료")
 
 
 # ============================================================
@@ -604,7 +604,7 @@ _game_instance = None
 
 
 def _signal_handler(signum, frame):
-    print(f"\n⚠️  시그널: {signal.Signals(signum).name}")
+    print(f"\n 시그널: {signal.Signals(signum).name}")
     if _game_instance is not None:
         _game_instance.cleanup()
     sys.exit(0)

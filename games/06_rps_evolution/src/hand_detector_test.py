@@ -40,7 +40,7 @@ def main():
     cap = cv2.VideoCapture(0)
 
     if not cap.isOpened():
-        print("❌ 카메라를 열 수 없습니다.")
+        print("카메라를 열 수 없습니다.")
         print("   - 다른 앱에서 카메라를 사용 중인지 확인")
         print("   - 카메라 인덱스를 0 → 1 → 2로 변경 시도")
         return
@@ -49,11 +49,11 @@ def main():
     cap.set(cv2.CAP_PROP_FRAME_WIDTH, 1280)
     cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 720)
 
-    print("✅ 카메라 연결 성공")
+    print("카메라 연결 성공")
     print(f"   해상도: {int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))}x{int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))}")
     print(f"   FPS: {cap.get(cv2.CAP_PROP_FPS):.1f}")
-    print("\n📌 종료: 화면을 클릭한 후 'q' 또는 ESC 키")
-    print("📌 손을 카메라에 보여주세요!\n")
+    print("\n종료: 화면을 클릭한 후 'q' 또는 ESC 키")
+    print("손을 카메라에 보여주세요!\n")
 
     # ============================================================
     # 3. MediaPipe Hands 컨텍스트
@@ -75,7 +75,7 @@ def main():
             # ----------------------------------------
             success, frame = cap.read()
             if not success:
-                print("⚠️  프레임을 읽지 못했습니다.")
+                print(" 프레임을 읽지 못했습니다.")
                 continue
 
             # 거울 모드 (좌우 반전): 사용자가 자연스럽게 손을 움직이도록
@@ -188,7 +188,7 @@ def main():
     # ============================================================
     cap.release()
     cv2.destroyAllWindows()
-    print("\n✅ 종료되었습니다.")
+    print("\n종료되었습니다.")
 
 
 if __name__ == "__main__":

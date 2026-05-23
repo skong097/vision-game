@@ -28,13 +28,13 @@ def test_camera_indices():
             ret, frame = cap.read()
             if ret and frame is not None:
                 h, w = frame.shape[:2]
-                print(f"  ✅ Camera {idx}: 사용 가능 ({w}x{h})")
+                print(f"  Camera {idx}: 사용 가능 ({w}x{h})")
                 available.append((idx, w, h))
             else:
-                print(f"  ⚠️  Camera {idx}: 열림, but 프레임 읽기 실패")
+                print(f"   Camera {idx}: 열림, but 프레임 읽기 실패")
             cap.release()
         else:
-            print(f"  ❌ Camera {idx}: 열기 실패")
+            print(f"  Camera {idx}: 열기 실패")
     
     return available
 
@@ -47,7 +47,7 @@ def test_resolution(camera_idx):
     
     cap = cv2.VideoCapture(camera_idx)
     if not cap.isOpened():
-        print(f"  ❌ 카메라 {camera_idx} 열기 실패")
+        print(f"  카메라 {camera_idx} 열기 실패")
         return None
     
     # 기본 해상도
@@ -85,12 +85,12 @@ def test_window_display(camera_idx):
     print(f"\n{'=' * 60}")
     print(f"[Test 3] 카메라 {camera_idx} 윈도우 표시 테스트 (5초)")
     print(f"{'=' * 60}")
-    print("  카메라 영상이 보이면 ✅, 검은 화면이면 ❌")
+    print("  카메라 영상이 보이면 , 검은 화면이면 ")
     print("  종료: 'q' 키 또는 5초 자동 종료")
     
     cap = cv2.VideoCapture(camera_idx)
     if not cap.isOpened():
-        print(f"  ❌ 카메라 {camera_idx} 열기 실패")
+        print(f"  카메라 {camera_idx} 열기 실패")
         return False
     
     cap.set(cv2.CAP_PROP_FRAME_WIDTH, 1280)
@@ -108,7 +108,7 @@ def test_window_display(camera_idx):
     while True:
         ret, frame = cap.read()
         if not ret:
-            print("  ⚠️  프레임 읽기 실패")
+            print("   프레임 읽기 실패")
             break
         
         frame_count += 1
@@ -129,7 +129,7 @@ def test_window_display(camera_idx):
         
         elapsed = time.time() - start_time
         if elapsed > 5.0:
-            print(f"  ✅ 5초 경과, 프레임 수: {frame_count} (목표: 100+)")
+            print(f"  5초 경과, 프레임 수: {frame_count} (목표: 100+)")
             break
         
         if cv2.waitKey(1) & 0xFF == ord('q'):
@@ -160,7 +160,7 @@ def main():
     # Test 1: 카메라 인덱스
     available = test_camera_indices()
     if not available:
-        print("\n❌ 사용 가능한 카메라가 없습니다!")
+        print("\n사용 가능한 카메라가 없습니다!")
         print("\n해결 방법:")
         print("  1. 카메라가 다른 프로그램에 점유되어 있는지 확인")
         print("     $ sudo fuser -k /dev/video0")
@@ -184,7 +184,7 @@ def main():
     
     # 최종 진단
     print("\n" + "=" * 60)
-    print("📋 진단 결과 요약")
+    print("진단 결과 요약")
     print("=" * 60)
     
     print(f"  사용 가능 카메라: {len(available)}개")
@@ -193,13 +193,13 @@ def main():
         actual_w, actual_h, success = res_result
         print(f"  실제 적용 해상도: {actual_w}x{actual_h}")
         print(f"  프레임 읽기 성공: {success}/5")
-    print(f"  윈도우 표시 정상: {'✅ 예' if display_ok else '❌ 아니오'}")
+    print(f"  윈도우 표시 정상: {'예' if display_ok else '아니오'}")
     
     if display_ok and res_result and res_result[2] >= 4:
-        print("\n✅ 카메라 정상! 게임 실행 가능")
-        print(f"\n💡 game.py에서 카메라 인덱스가 {camera_idx} 인지 확인")
+        print("\n카메라 정상! 게임 실행 가능")
+        print(f"\ngame.py에서 카메라 인덱스가 {camera_idx} 인지 확인")
     else:
-        print("\n⚠️  문제가 있습니다. 위 결과를 알려주세요.")
+        print("\n 문제가 있습니다. 위 결과를 알려주세요.")
 
 
 if __name__ == "__main__":

@@ -174,7 +174,7 @@ class RPSEvolutionGame:
         # 카운트다운 사운드 트리거 (각 숫자 한 번만)
         self.countdown_played = set()
         
-        # ★ 화면 크기 / 전체 화면 상태
+        # 화면 크기 / 전체 화면 상태
         self.window_name = "PlayWait - RPS Evolution"
         self.display_scale = theme.DISPLAY_SCALE  # 기본 1.5
         self.is_fullscreen = False
@@ -192,8 +192,8 @@ class RPSEvolutionGame:
         self.cap = cv2.VideoCapture(0)
         
         if not self.cap.isOpened():
-            print("❌ 카메라를 열 수 없습니다.")
-            print("\n🔧 해결 방법:")
+            print("카메라를 열 수 없습니다.")
+            print("\n해결 방법:")
             print("   1. 다른 프로그램이 카메라를 사용 중인지 확인")
             print("      (Zoom, Teams, OBS, 브라우저 등)")
             print("   2. 이전 게임 프로세스가 남아있을 수 있음:")
@@ -210,7 +210,7 @@ class RPSEvolutionGame:
         # 카메라가 실제로 읽히는지 검증
         ret, _ = self.cap.read()
         if not ret:
-            print("❌ 카메라는 열렸지만 프레임을 읽을 수 없습니다.")
+            print("카메라는 열렸지만 프레임을 읽을 수 없습니다.")
             self.cap.release()
             self.cap = None
             return False
@@ -222,7 +222,7 @@ class RPSEvolutionGame:
             max_num_hands=1,
         )
         
-        # ★ 윈도우 미리 생성 (resize/fullscreen 가능하게)
+        # 윈도우 미리 생성 (resize/fullscreen 가능하게)
         cv2.namedWindow(self.window_name, cv2.WINDOW_NORMAL)
         self._apply_window_size()
         
@@ -247,25 +247,25 @@ class RPSEvolutionGame:
         if key == ord('q') or key == 27:
             return False
         
-        # ★ 화면 크기 조절 (모든 페이즈에서 동작)
+        # 화면 크기 조절 (모든 페이즈에서 동작)
         if key == ord('f') or key == ord('F'):
             self._toggle_fullscreen()
             return True
         elif key in (ord('+'), ord('=')):
             self.display_scale = min(3.0, self.display_scale + 0.25)
             self._apply_window_size()
-            print(f"🔍 화면 크기: {self.display_scale:.2f}x")
+            print(f"화면 크기: {self.display_scale:.2f}x")
             return True
         elif key in (ord('-'), ord('_')):
             self.display_scale = max(0.5, self.display_scale - 0.25)
             self._apply_window_size()
-            print(f"🔍 화면 크기: {self.display_scale:.2f}x")
+            print(f"화면 크기: {self.display_scale:.2f}x")
             return True
         elif key == ord('0'):
             self.display_scale = theme.DISPLAY_SCALE
             self.is_fullscreen = False
             self._apply_window_size()
-            print(f"🔍 화면 크기 리셋: {self.display_scale:.2f}x")
+            print(f"화면 크기 리셋: {self.display_scale:.2f}x")
             return True
         
         # 페이즈별 키 처리
@@ -275,7 +275,7 @@ class RPSEvolutionGame:
                               ord('3'): "hard"}[key]
                 self.ai_player = AIPlayer(difficulty=difficulty)
                 self.sound.play("click")
-                print(f"🤖 난이도: {theme.DIFFICULTY_KOREAN[difficulty]}")
+                print(f"난이도: {theme.DIFFICULTY_KOREAN[difficulty]}")
                 self.change_phase(GamePhase.READY)
         
         elif self.phase == GamePhase.READY:
@@ -290,7 +290,7 @@ class RPSEvolutionGame:
                 self.ai_player.reset()
                 self.stability.reset()
                 self.sound.play("click")
-                print("\n🔄 게임 재시작!")
+                print("\n게임 재시작!")
                 self.change_phase(GamePhase.DIFFICULTY_SELECT)
         
         return True
@@ -307,7 +307,7 @@ class RPSEvolutionGame:
                 cv2.WND_PROP_FULLSCREEN,
                 cv2.WINDOW_FULLSCREEN
             )
-            print("🖥️  전체 화면 ON")
+            print(" 전체 화면 ON")
         else:
             cv2.setWindowProperty(
                 self.window_name,
@@ -315,7 +315,7 @@ class RPSEvolutionGame:
                 cv2.WINDOW_NORMAL
             )
             self._apply_window_size()
-            print("🖥️  전체 화면 OFF")
+            print(" 전체 화면 OFF")
     
     def _apply_window_size(self):
         """현재 display_scale에 맞춰 창 크기 적용"""
@@ -336,7 +336,7 @@ class RPSEvolutionGame:
             if self.phase == GamePhase.DIFFICULTY_SELECT:
                 diff = self.auto_play_difficulty or "normal"
                 self.ai_player = AIPlayer(difficulty=diff)
-                print(f"🤖 [auto_play] 난이도: {diff}")
+                print(f"[auto_play] 난이도: {diff}")
                 self.change_phase(GamePhase.READY)
                 return
             if (self.phase == GamePhase.READY
@@ -363,11 +363,11 @@ class RPSEvolutionGame:
                     self.user_shape = confirmed
                     self.ai_shape = self.ai_player.choose_shape()
                     self.sound.play("reveal")
-                    print(f"  👤 나: {theme.SHAPE_KOREAN_FULL[self.user_shape]}")
-                    print(f"  🤖 Doby: {theme.SHAPE_KOREAN_FULL[self.ai_shape]}")
+                    print(f"  나: {theme.SHAPE_KOREAN_FULL[self.user_shape]}")
+                    print(f"  Doby: {theme.SHAPE_KOREAN_FULL[self.ai_shape]}")
                     self.change_phase(GamePhase.REVEAL)
                 else:
-                    print("  ⚠️  손 모양 인식 실패. 다시 시도.")
+                    print("   손 모양 인식 실패. 다시 시도.")
                     self.change_phase(GamePhase.COUNTDOWN)
         
         elif self.phase == GamePhase.REVEAL:
@@ -388,9 +388,9 @@ class RPSEvolutionGame:
                 
                 # 콘솔 결과
                 result_emoji = {
-                    "user_win": "🎉 승리!",
-                    "ai_win": "😢 패배",
-                    "draw": "🤝 무승부"
+                    "user_win": "승리!",
+                    "ai_win": "패배",
+                    "draw": "무승부"
                 }
                 print(f"  → {result_emoji[round_data['result']]} "
                       f"(점수 {round_data['user_score']}:{round_data['ai_score']})")
@@ -404,12 +404,12 @@ class RPSEvolutionGame:
                     if winner == "user":
                         self.sound.play("victory")
                         print(f"\n{'='*40}")
-                        print("🏆 게임 우승! 쿠폰 발급!")
+                        print("게임 우승! 쿠폰 발급!")
                         print(f"{'='*40}")
                     else:
                         self.sound.play("lose")
                         print(f"\n{'='*40}")
-                        print("😢 게임 패배. 다시 도전하세요!")
+                        print("게임 패배. 다시 도전하세요!")
                         print(f"{'='*40}")
                     self.change_phase(GamePhase.GAME_OVER)
                 else:
@@ -480,7 +480,7 @@ class RPSEvolutionGame:
         # 4. 공통: FPS
         ui.draw_fps(frame, self.fps)
         
-        # ★ 모든 텍스트를 한 번에 렌더링 (성능 핵심)
+        # 모든 텍스트를 한 번에 렌더링 (성능 핵심)
         ui.flush_text(frame)
         
         return frame
@@ -493,7 +493,7 @@ class RPSEvolutionGame:
             return
         
         print("\n" + "=" * 50)
-        print("🎮 PlayWait - 가위바위보 진화 (RPS Evolution)")
+        print("PlayWait - 가위바위보 진화 (RPS Evolution)")
         print("=" * 50)
         print("\n[게임 조작]")
         print("  [1] 쉬움  [2] 보통  [3] 어려움 - 난이도 선택")
@@ -559,7 +559,7 @@ class RPSEvolutionGame:
                 # UI 합성
                 frame = self.render(frame, current_shape, hand_detected)
                 
-                # ★ 화면 크기 적용
+                # 화면 크기 적용
                 if self.is_fullscreen:
                     # 전체 화면: 그대로 표시 (Window가 알아서 stretching)
                     cv2.imshow(self.window_name, frame)
@@ -581,13 +581,13 @@ class RPSEvolutionGame:
                     break
         
         except KeyboardInterrupt:
-            print("\n⚠️  사용자가 Ctrl+C로 중단")
+            print("\n 사용자가 Ctrl+C로 중단")
         except Exception as e:
-            print(f"\n❌ 게임 중 오류 발생: {e}")
+            print(f"\n게임 중 오류 발생: {e}")
             import traceback
             traceback.print_exc()
         finally:
-            # ★ 어떤 경우에도 반드시 cleanup 실행
+            # 어떤 경우에도 반드시 cleanup 실행
             self.cleanup()
     
     # ----------------------------------------
@@ -595,16 +595,16 @@ class RPSEvolutionGame:
     # ----------------------------------------
     def cleanup(self):
         """모든 리소스 안전하게 해제 (멱등성 보장)"""
-        print("\n🧹 리소스 정리 중...")
+        print("\n리소스 정리 중...")
         
         # 카메라 해제
         if self.cap is not None:
             try:
                 if self.cap.isOpened():
                     self.cap.release()
-                    print("   ✓ 카메라 해제")
+                    print("   카메라 해제")
             except Exception as e:
-                print(f"   ⚠️  카메라 해제 오류: {e}")
+                print(f"    카메라 해제 오류: {e}")
             finally:
                 self.cap = None
         
@@ -612,9 +612,9 @@ class RPSEvolutionGame:
         if self.hands is not None:
             try:
                 self.hands.close()
-                print("   ✓ MediaPipe 해제")
+                print("   MediaPipe 해제")
             except Exception as e:
-                print(f"   ⚠️  MediaPipe 해제 오류: {e}")
+                print(f"    MediaPipe 해제 오류: {e}")
             finally:
                 self.hands = None
         
@@ -622,9 +622,9 @@ class RPSEvolutionGame:
         if self.sound is not None:
             try:
                 self.sound.cleanup()
-                print("   ✓ 사운드 해제")
+                print("   사운드 해제")
             except Exception as e:
-                print(f"   ⚠️  사운드 해제 오류: {e}")
+                print(f"    사운드 해제 오류: {e}")
         
         # OpenCV 윈도우 정리
         try:
@@ -632,11 +632,11 @@ class RPSEvolutionGame:
             # waitKey 호출로 윈도우 종료 이벤트 처리
             for _ in range(4):
                 cv2.waitKey(1)
-            print("   ✓ 윈도우 닫음")
+            print("   윈도우 닫음")
         except Exception as e:
-            print(f"   ⚠️  윈도우 종료 오류: {e}")
+            print(f"    윈도우 종료 오류: {e}")
         
-        print("✅ 게임 종료 완료")
+        print("게임 종료 완료")
 
 
 # ============================================================
@@ -651,7 +651,7 @@ _game_instance = None
 
 def _signal_handler(signum, frame):
     """SIGINT(Ctrl+C), SIGTERM 처리"""
-    print(f"\n⚠️  시그널 수신: {signal.Signals(signum).name}")
+    print(f"\n 시그널 수신: {signal.Signals(signum).name}")
     if _game_instance is not None:
         _game_instance.cleanup()
     import sys

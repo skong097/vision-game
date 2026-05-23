@@ -1,4 +1,4 @@
-# 🤫 고요 속의 외침 (Silent Charades) — W9 (LLM 도입)
+# 고요 속의 외침 (Silent Charades) — W9 (LLM 도입)
 
 Doby가 출제한 한국어 단어를 손짓·몸짓·표정으로 표현. 마지막 frame을 **Claude AI**가 보고 0~100점으로 평가.
 5라운드 / 4정답 이상 = 승리.

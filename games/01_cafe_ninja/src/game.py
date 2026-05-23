@@ -153,9 +153,9 @@ class CafeNinjaGame:
                 target_height=theme.MASCOT_HEIGHT,
                 fps=theme.MASCOT_FPS,
             )
-            print(f"🥷 닌자 마스코트 로드: {theme.NINJA_SPRITE_DIR}")
+            print(f"닌자 마스코트 로드: {theme.NINJA_SPRITE_DIR}")
         except Exception as e:
-            print(f"⚠️  마스코트 로드 실패 (무시하고 진행): {e}")
+            print(f" 마스코트 로드 실패 (무시하고 진행): {e}")
         try:
             self.background = load_background(
                 theme.BACKGROUND_PATH,
@@ -164,16 +164,16 @@ class CafeNinjaGame:
                 brightness=theme.BACKGROUND_BRIGHTNESS,
                 saturation=theme.BACKGROUND_SATURATION,
             )
-            print(f"🏯 배경 로드: {theme.BACKGROUND_PATH}")
+            print(f"배경 로드: {theme.BACKGROUND_PATH}")
         except Exception as e:
-            print(f"⚠️  배경 로드 실패 (무시하고 진행): {e}")
+            print(f" 배경 로드 실패 (무시하고 진행): {e}")
 
         # 폴리싱: 그림자 실루엣 (Selfie Seg + Face Detection)
         self.silhouette = NinjaSilhouette()
         if self.silhouette.available:
-            print("🥷 Silhouette 활성 (Selfie Seg + Face Detection)")
+            print("Silhouette 활성 (Selfie Seg + Face Detection)")
         else:
-            print("⚠️ Silhouette 비활성 — spotlight 폴백")
+            print("Silhouette 비활성 — spotlight 폴백")
 
     # ----------------------------------------
     # 초기화
@@ -181,7 +181,7 @@ class CafeNinjaGame:
     def setup(self):
         self.cap = cv2.VideoCapture(0)
         if not self.cap.isOpened():
-            print("❌ 카메라를 열 수 없습니다.")
+            print("카메라를 열 수 없습니다.")
             print("   sudo fuser -k /dev/video0")
             self.cap = None
             return False
@@ -190,7 +190,7 @@ class CafeNinjaGame:
         self.cap.set(cv2.CAP_PROP_FRAME_HEIGHT, theme.SCREEN_HEIGHT)
         ok, _ = self.cap.read()
         if not ok:
-            print("❌ 카메라 프레임을 읽을 수 없습니다.")
+            print("카메라 프레임을 읽을 수 없습니다.")
             self.cap.release()
             self.cap = None
             return False
@@ -225,12 +225,12 @@ class CafeNinjaGame:
         if key in (ord('+'), ord('=')):
             self.display_scale = min(3.0, self.display_scale + 0.25)
             self._apply_window_size()
-            print(f"🔍 화면: {self.display_scale:.2f}x")
+            print(f"화면: {self.display_scale:.2f}x")
             return True
         if key in (ord('-'), ord('_')):
             self.display_scale = max(0.5, self.display_scale - 0.25)
             self._apply_window_size()
-            print(f"🔍 화면: {self.display_scale:.2f}x")
+            print(f"화면: {self.display_scale:.2f}x")
             return True
         if key == ord('0'):
             self.display_scale = theme.DISPLAY_SCALE
@@ -250,7 +250,7 @@ class CafeNinjaGame:
                 self.score = ScoreState(difficulty=self.difficulty)
                 self.spawner = Spawner(difficulty=self.difficulty)
                 self.sound.play("click")
-                print(f"🎮 난이도: {theme.DIFFICULTY_KOREAN[self.difficulty]} "
+                print(f"난이도: {theme.DIFFICULTY_KOREAN[self.difficulty]} "
                       f"(목표 {self.score.target}점)")
                 self.phase = GamePhase.READY
 
@@ -270,7 +270,7 @@ class CafeNinjaGame:
                 self.trail.reset()
                 self.objects.clear()
                 self.flashes.clear()
-                print("\n🔄 게임 재시작")
+                print("\n게임 재시작")
                 self.phase = GamePhase.DIFFICULTY_SELECT
 
         return True
@@ -284,13 +284,13 @@ class CafeNinjaGame:
             cv2.setWindowProperty(self.window_name,
                                    cv2.WND_PROP_FULLSCREEN,
                                    cv2.WINDOW_FULLSCREEN)
-            print("🖥️  전체 화면 ON")
+            print(" 전체 화면 ON")
         else:
             cv2.setWindowProperty(self.window_name,
                                    cv2.WND_PROP_FULLSCREEN,
                                    cv2.WINDOW_NORMAL)
             self._apply_window_size()
-            print("🖥️  전체 화면 OFF")
+            print(" 전체 화면 OFF")
 
     def _apply_window_size(self):
         if self.is_fullscreen:
@@ -350,9 +350,9 @@ class CafeNinjaGame:
                 ))
                 # 콘솔 로그
                 if result.bomb_count > 0:
-                    print(f"  💥 폭탄! 생명 {self.score.lives}/{ScoreState.START_LIVES}")
+                    print(f"  폭탄! 생명 {self.score.lives}/{ScoreState.START_LIVES}")
                 if result.score_gained > 0:
-                    print(f"  ✨ +{result.score_gained}점 "
+                    print(f"  +{result.score_gained}점 "
                           f"(콤보 ×{result.multiplier}) → 총 {self.score.score}점")
 
         # 5) 화면 밖 객체 + 베인 객체 제거
@@ -371,13 +371,13 @@ class CafeNinjaGame:
             if end == END_WIN:
                 self.sound.play("victory")
                 print(f"\n{'='*40}")
-                print(f"🏆 우승! {self.score.score}점 / 목표 {self.score.target}점")
+                print(f"우승! {self.score.score}점 / 목표 {self.score.target}점")
                 print(f"{'='*40}")
             else:
                 self.sound.play("lose")
                 reason = "생명 소진" if end == END_LIVES_OUT else "시간 초과"
                 print(f"\n{'='*40}")
-                print(f"💔 {reason} ({self.score.score}/{self.score.target}점)")
+                print(f"{reason} ({self.score.score}/{self.score.target}점)")
                 print(f"{'='*40}")
             summary = self.score.get_summary()
             print(f"   최고 콤보: {summary['max_combo']}, "
@@ -477,7 +477,7 @@ class CafeNinjaGame:
             return
 
         print("\n" + "=" * 50)
-        print("🥷 PlayWait W3 - 카페 닌자 (Cafe Ninja)")
+        print("PlayWait W3 - 카페 닌자 (Cafe Ninja)")
         print("=" * 50)
         print("\n[게임 조작]")
         print("  [1/2/3] 난이도 선택")
@@ -569,9 +569,9 @@ class CafeNinjaGame:
                     break
 
         except KeyboardInterrupt:
-            print("\n⚠️  사용자가 Ctrl+C로 중단")
+            print("\n 사용자가 Ctrl+C로 중단")
         except Exception as e:
-            print(f"\n❌ 오류: {e}")
+            print(f"\n오류: {e}")
             import traceback
             traceback.print_exc()
         finally:
@@ -581,13 +581,13 @@ class CafeNinjaGame:
     # 안전 종료
     # ----------------------------------------
     def cleanup(self):
-        print("\n🧹 리소스 정리 중...")
+        print("\n리소스 정리 중...")
 
         if self.cap is not None:
             try:
                 if self.cap.isOpened():
                     self.cap.release()
-                    print("   ✓ 카메라 해제")
+                    print("   카메라 해제")
             except Exception:
                 pass
             finally:
@@ -596,7 +596,7 @@ class CafeNinjaGame:
         if self.hands is not None:
             try:
                 self.hands.close()
-                print("   ✓ MediaPipe 해제")
+                print("   MediaPipe 해제")
             except Exception:
                 pass
             finally:
@@ -605,7 +605,7 @@ class CafeNinjaGame:
         if self.sound is not None:
             try:
                 self.sound.cleanup()
-                print("   ✓ 사운드 해제")
+                print("   사운드 해제")
             except Exception:
                 pass
 
@@ -613,11 +613,11 @@ class CafeNinjaGame:
             cv2.destroyAllWindows()
             for _ in range(4):
                 cv2.waitKey(1)
-            print("   ✓ 윈도우 닫음")
+            print("   윈도우 닫음")
         except Exception:
             pass
 
-        print("✅ 게임 종료 완료")
+        print("게임 종료 완료")
 
 
 # ============================================================
@@ -627,7 +627,7 @@ _game_instance = None
 
 
 def _signal_handler(signum, frame):
-    print(f"\n⚠️  시그널: {signal.Signals(signum).name}")
+    print(f"\n 시그널: {signal.Signals(signum).name}")
     if _game_instance is not None:
         _game_instance.cleanup()
     sys.exit(0)

@@ -26,7 +26,7 @@ def test_render_method(method_name, **config):
     
     cap = cv2.VideoCapture(0)
     if not cap.isOpened():
-        print("  ❌ 카메라 열기 실패")
+        print("  카메라 열기 실패")
         return
     
     # 해상도 설정
@@ -76,11 +76,11 @@ def test_render_method(method_name, **config):
     fps = frame_count / 5.0
     print(f"  결과: {frame_count} 프레임 / 5초 = {fps:.1f} fps")
     if fps >= 25:
-        print(f"  ✅ 정상 (25fps 이상)")
+        print(f"  정상 (25fps 이상)")
     elif fps >= 10:
-        print(f"  ⚠️  느림")
+        print(f"   느림")
     else:
-        print(f"  ❌ 매우 느림")
+        print(f"  매우 느림")
     
     return fps
 
@@ -112,22 +112,22 @@ def main():
             print("\n중단됨")
             break
         except Exception as e:
-            print(f"  ❌ 오류: {e}")
+            print(f"  오류: {e}")
             results.append((name, 0))
     
     # 결과 요약
     print("\n" + "=" * 60)
-    print("📋 최종 결과")
+    print("최종 결과")
     print("=" * 60)
     for name, fps in results:
-        marker = "✅" if fps >= 25 else "⚠️" if fps >= 10 else "❌"
+        marker = "" if fps >= 25 else "" if fps >= 10 else ""
         print(f"  {marker} {name}: {fps:.1f} fps")
     
     if results:
         best = max(results, key=lambda x: x[1])
-        print(f"\n👉 최고: {best[0]} ({best[1]:.1f} fps)")
+        print(f"\n최고: {best[0]} ({best[1]:.1f} fps)")
         if best[1] < 25:
-            print("\n⚠️  모든 설정에서 25fps 미만 → 시스템 GPU/드라이버 문제")
+            print("\n 모든 설정에서 25fps 미만 → 시스템 GPU/드라이버 문제")
             print("\n해결책:")
             print("  1. sudo apt install python3-opencv  (시스템 패키지)")
             print("  2. opencv-contrib-python 으로 변경")

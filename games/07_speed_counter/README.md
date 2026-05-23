@@ -1,17 +1,17 @@
-# 🔢 스피드 카운터 (Speed Counter)
+# 스피드 카운터 (Speed Counter)
 
 > **PlayWait W2** — 두 번째 게임
 > **기술**: MediaPipe Hands (양손)
-> **난이도**: ⭐⭐
+> **난이도**: 
 > **상태**: 코드 구현 완료, 단위 테스트 39/39 통과 (실기 테스트 대기)
 
 ---
 
-## 📌 한 줄 소개
+## 한 줄 소개
 
 화면에 뜨는 숫자(1~10)를 **양손 손가락 합산**으로 빠르게 표현해 **5연속 정답**에 도달하면 승리하는 콤보 게임.
 
-## 🎮 게임 규칙
+## 게임 규칙
 
 - 1~10 중 무작위 출제 (직전 숫자 회피)
 - 두 손 손가락의 합으로 답을 만든다 (예: 7 = 5 + 2 또는 4 + 3)
@@ -26,7 +26,7 @@
 | 3~4 (가속) | 3.5초 | 2.5초 | 1.7초 |
 | 5+ (최고) | 3.0초 | 2.0초 | 1.4초 |
 
-## 🚀 실행
+## 실행
 
 ```bash
 cd ~/PlayWait
@@ -42,7 +42,7 @@ python -m games.07_speed_counter.src.sound_manager     # 사운드 6종 시연
 .venv/bin/pytest games/07_speed_counter/tests/ -v
 ```
 
-## ⌨️ 조작
+## 조작
 
 | 키 | 동작 |
 |---|---|
@@ -55,7 +55,7 @@ python -m games.07_speed_counter.src.sound_manager     # 사운드 6종 시연
 | **- / _** | 화면 축소 (0.25배씩, 최소 0.5) |
 | **0** | 기본 크기 (1.5배) 리셋 |
 
-## 🧱 구조
+## 구조
 
 ```
 07_speed_counter/
@@ -76,7 +76,7 @@ python -m games.07_speed_counter.src.sound_manager     # 사운드 6종 시연
     └── test_score_tracker.py     # 16 cases
 ```
 
-## 🔄 페이즈 흐름
+## 페이즈 흐름
 
 ```
 DIFFICULTY_SELECT → READY → QUESTION ↻ ROUND_RESULT
@@ -86,14 +86,14 @@ DIFFICULTY_SELECT → READY → QUESTION ↻ ROUND_RESULT
 
 `QUESTION` 페이즈는 제한 시간 종료 시점에 안정화 버퍼(`StabilityBuffer`, window=5/threshold=4)의 확정값을 정답과 비교한다.
 
-## 🎨 디자인 (W1 표준 준수)
+## 디자인 (W1 표준 준수)
 
 - 카메라 캡처 640×480 @ 30fps, 화면은 `DISPLAY_SCALE=1.5`로 960×720 표시
 - PinkLAB 핑크 `#FF6B9D` 메인, 정답 초록 / 오답 빨강 / 경고 노랑
 - 한글 UI는 PIL 배치 렌더링(`begin_frame` → `draw_text_korean` → `flush_text`)
 - 안전 종료: try-finally + signal(SIGINT/SIGTERM) + atexit
 
-## ✅ Definition of Done
+## Definition of Done
 
 - [x] 양손 손가락 합산 1~10 알고리즘 구현
 - [x] 가속 시간 단축이 콤보별로 정확히 작동 (단위 테스트로 검증)
@@ -104,7 +104,7 @@ DIFFICULTY_SELECT → READY → QUESTION ↻ ROUND_RESULT
 - [ ] **실기 플레이 테스트** (Stephen 직접 수행)
 - [ ] 30fps 유지 확인 (실기 테스트 시 측정)
 
-## 📝 W1 → W2 변경 핵심
+## W1 → W2 변경 핵심
 
 | 항목 | W1 (가위바위보) | W2 (스피드 카운터) |
 |---|---|---|

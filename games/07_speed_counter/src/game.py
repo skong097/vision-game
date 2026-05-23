@@ -147,8 +147,8 @@ class SpeedCounterGame:
     def setup(self):
         self.cap = cv2.VideoCapture(self.camera_index)
         if not self.cap.isOpened():
-            print("❌ 카메라를 열 수 없습니다.")
-            print("\n🔧 해결:")
+            print("카메라를 열 수 없습니다.")
+            print("\n해결:")
             print("   sudo fuser -k /dev/video0")
             self.cap = None
             return False
@@ -158,7 +158,7 @@ class SpeedCounterGame:
         
         ret, _ = self.cap.read()
         if not ret:
-            print("❌ 카메라 프레임을 읽을 수 없습니다.")
+            print("카메라 프레임을 읽을 수 없습니다.")
             self.cap.release()
             self.cap = None
             return False
@@ -167,7 +167,7 @@ class SpeedCounterGame:
             model_complexity=1,
             min_detection_confidence=0.7,
             min_tracking_confidence=0.5,
-            max_num_hands=2,  # ★ W2: 두 손
+            max_num_hands=2,  # W2: 두 손
         )
         
         # WINDOW_KEEPRATIO — fullscreen 시 cv2 가 frame aspect 자동 유지 + letterbox.
@@ -230,9 +230,9 @@ class SpeedCounterGame:
         try:
             with open(self.result_json_path, "w") as f:
                 json.dump(payload, f)
-            print(f"💾 결과 저장: {self.result_json_path} {payload}")
+            print(f"결과 저장: {self.result_json_path} {payload}")
         except Exception as e:
-            print(f"⚠️  결과 저장 실패: {e}")
+            print(f" 결과 저장 실패: {e}")
 
     def get_phase_elapsed(self) -> float:
         return time.time() - self.phase_start_time
@@ -268,12 +268,12 @@ class SpeedCounterGame:
         elif key in (ord('+'), ord('=')):
             self.display_scale = min(3.0, self.display_scale + 0.25)
             self._apply_window_size()
-            print(f"🔍 화면: {self.display_scale:.2f}x")
+            print(f"화면: {self.display_scale:.2f}x")
             return True
         elif key in (ord('-'), ord('_')):
             self.display_scale = max(0.5, self.display_scale - 0.25)
             self._apply_window_size()
-            print(f"🔍 화면: {self.display_scale:.2f}x")
+            print(f"화면: {self.display_scale:.2f}x")
             return True
         elif key == ord('0'):
             self.display_scale = theme.DISPLAY_SCALE
@@ -288,7 +288,7 @@ class SpeedCounterGame:
                             ord('3'): "hard"}
                 self.difficulty = diff_map[key]
                 self.sound.play("click")
-                print(f"🎮 난이도: {theme.DIFFICULTY_KOREAN[self.difficulty]}")
+                print(f"난이도: {theme.DIFFICULTY_KOREAN[self.difficulty]}")
                 self.change_phase(GamePhase.READY)
         
         elif self.phase == GamePhase.READY:
@@ -304,7 +304,7 @@ class SpeedCounterGame:
                 self.qgen.reset()
                 self.stability.reset()
                 self.sound.play("click")
-                print("\n🔄 게임 재시작")
+                print("\n게임 재시작")
                 self.change_phase(GamePhase.DIFFICULTY_SELECT)
         
         return True
@@ -318,13 +318,13 @@ class SpeedCounterGame:
             cv2.setWindowProperty(self.window_name,
                                    cv2.WND_PROP_FULLSCREEN,
                                    cv2.WINDOW_FULLSCREEN)
-            print("🖥️  전체 화면 ON")
+            print(" 전체 화면 ON")
         else:
             cv2.setWindowProperty(self.window_name,
                                    cv2.WND_PROP_FULLSCREEN,
                                    cv2.WINDOW_NORMAL)
             self._apply_window_size()
-            print("🖥️  전체 화면 OFF")
+            print(" 전체 화면 OFF")
     
     def _apply_window_size(self):
         if self.is_fullscreen:
@@ -348,7 +348,7 @@ class SpeedCounterGame:
         if self.auto_play:
             if self.phase == GamePhase.DIFFICULTY_SELECT:
                 self.difficulty = self.auto_play_difficulty or "normal"
-                print(f"🎮 [auto_play] 난이도: {self.difficulty}")
+                print(f"[auto_play] 난이도: {self.difficulty}")
                 self.change_phase(GamePhase.READY)
                 return
             if (self.phase == GamePhase.READY
@@ -373,13 +373,13 @@ class SpeedCounterGame:
                 if is_correct:
                     self.score.record_correct()
                     self.sound.play("win")
-                    print(f"  ✅ 정답! ({self.current_question} = {confirmed}) "
+                    print(f"  정답! ({self.current_question} = {confirmed}) "
                           f"콤보 {self.score.combo}")
                 else:
                     self.score.record_wrong()
                     self.sound.play("lose")
                     user_str = str(confirmed) if confirmed is not None else "인식실패"
-                    print(f"  ❌ 오답! 정답 {self.current_question}, "
+                    print(f"  오답! 정답 {self.current_question}, "
                           f"당신 {user_str} | 오답 {self.score.total_wrong}/5")
                 
                 self.change_phase(GamePhase.ROUND_RESULT)
@@ -393,17 +393,17 @@ class SpeedCounterGame:
                     if end == END_WIN:
                         self.sound.play("victory")
                         print(f"\n{'='*40}")
-                        print(f"🏆 우승! 5연속 정답 달성!")
+                        print(f"우승! 5연속 정답 달성!")
                         print(f"{'='*40}")
                     elif end == END_TIMEOUT:
                         self.sound.play("lose")
                         print(f"\n{'='*40}")
-                        print(f"⏰ 시간 초과")
+                        print(f"시간 초과")
                         print(f"{'='*40}")
                     elif end == END_TOO_MANY_FAILS:
                         self.sound.play("lose")
                         print(f"\n{'='*40}")
-                        print(f"💔 오답 5회 누적")
+                        print(f"오답 5회 누적")
                         print(f"{'='*40}")
                     
                     summary = self.score.get_summary()
@@ -509,7 +509,7 @@ class SpeedCounterGame:
             return
         
         print("\n" + "=" * 50)
-        print("🎮 PlayWait W2 - 스피드 카운터 (Speed Counter)")
+        print("PlayWait W2 - 스피드 카운터 (Speed Counter)")
         print("=" * 50)
         print("\n[게임 조작]")
         print("  [1/2/3] 난이도 선택")
@@ -585,13 +585,13 @@ class SpeedCounterGame:
                         and self.phase == GamePhase.GAME_OVER
                         and self.game_over_at is not None
                         and time.time() - self.game_over_at >= self.auto_exit_sec):
-                    print(f"⏰ auto-exit ({self.auto_exit_sec:.1f}s) → 종료")
+                    print(f"auto-exit ({self.auto_exit_sec:.1f}s) → 종료")
                     break
 
         except KeyboardInterrupt:
-            print("\n⚠️  사용자가 Ctrl+C로 중단")
+            print("\n 사용자가 Ctrl+C로 중단")
         except Exception as e:
-            print(f"\n❌ 오류: {e}")
+            print(f"\n오류: {e}")
             import traceback
             traceback.print_exc()
         finally:
@@ -602,13 +602,13 @@ class SpeedCounterGame:
     # ----------------------------------------
     def cleanup(self):
         """모든 리소스 안전하게 해제"""
-        print("\n🧹 리소스 정리 중...")
+        print("\n리소스 정리 중...")
         
         if self.cap is not None:
             try:
                 if self.cap.isOpened():
                     self.cap.release()
-                    print("   ✓ 카메라 해제")
+                    print("   카메라 해제")
             except Exception:
                 pass
             finally:
@@ -617,7 +617,7 @@ class SpeedCounterGame:
         if self.hands is not None:
             try:
                 self.hands.close()
-                print("   ✓ MediaPipe 해제")
+                print("   MediaPipe 해제")
             except Exception:
                 pass
             finally:
@@ -626,7 +626,7 @@ class SpeedCounterGame:
         if self.sound is not None:
             try:
                 self.sound.cleanup()
-                print("   ✓ 사운드 해제")
+                print("   사운드 해제")
             except Exception:
                 pass
         
@@ -634,11 +634,11 @@ class SpeedCounterGame:
             cv2.destroyAllWindows()
             for _ in range(4):
                 cv2.waitKey(1)
-            print("   ✓ 윈도우 닫음")
+            print("   윈도우 닫음")
         except Exception:
             pass
         
-        print("✅ 게임 종료 완료")
+        print("게임 종료 완료")
 
 
 # ============================================================
@@ -648,7 +648,7 @@ _game_instance = None
 
 
 def _signal_handler(signum, frame):
-    print(f"\n⚠️  시그널: {signal.Signals(signum).name}")
+    print(f"\n 시그널: {signal.Signals(signum).name}")
     if _game_instance is not None:
         _game_instance.cleanup()
     sys.exit(0)

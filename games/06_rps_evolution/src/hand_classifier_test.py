@@ -49,11 +49,11 @@ WRIST = 0
 
 # 손 모양 매핑: (엄지, 검지, 중지, 약지, 새끼) → 이름
 HAND_SHAPES = {
-    (0, 0, 0, 0, 0): "rock",       # ✊ 바위
-    (0, 1, 1, 0, 0): "scissors",   # ✌️ 가위
-    (1, 1, 1, 1, 1): "paper",      # 🖐️ 보
-    (1, 1, 0, 0, 0): "gun",        # 👉 총
-    (1, 1, 0, 0, 1): "phoenix",    # 🤟 불사조
+    (0, 0, 0, 0, 0): "rock",       # 바위
+    (0, 1, 1, 0, 0): "scissors",   # 가위
+    (1, 1, 1, 1, 1): "paper",      # 보
+    (1, 1, 0, 0, 0): "gun",        # 총
+    (1, 1, 0, 0, 1): "phoenix",    # 불사조
 }
 
 # 한글 이름 (UI 표시용)
@@ -68,12 +68,12 @@ SHAPE_KOREAN = {
 
 # 이모지 (콘솔 출력용)
 SHAPE_EMOJI = {
-    "rock": "✊",
-    "scissors": "✌️",
-    "paper": "🖐️",
-    "gun": "👉",
-    "phoenix": "🤟",
-    "unknown": "❓",
+    "rock": "",
+    "scissors": "",
+    "paper": "",
+    "gun": "",
+    "phoenix": "",
+    "unknown": "",
 }
 
 
@@ -169,20 +169,20 @@ def main():
     # 카메라 초기화
     cap = cv2.VideoCapture(0)
     if not cap.isOpened():
-        print("❌ 카메라를 열 수 없습니다.")
+        print("카메라를 열 수 없습니다.")
         return
     
     cap.set(cv2.CAP_PROP_FRAME_WIDTH, 1280)
     cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 720)
     
-    print("✅ 카메라 연결 성공")
-    print("\n📌 5가지 손 모양을 만들어 보세요:")
-    print("   ✊ 바위 (Rock)     - 모두 접기")
-    print("   ✌️  가위 (Scissors) - 검지+중지")
-    print("   🖐️ 보 (Paper)      - 모두 펴기")
-    print("   👉 총 (Gun)        - 엄지+검지")
-    print("   🤟 불사조 (Phoenix) - 엄지+검지+새끼")
-    print("\n📌 종료: 'q' 또는 ESC\n")
+    print("카메라 연결 성공")
+    print("\n5가지 손 모양을 만들어 보세요:")
+    print("   바위 (Rock)     - 모두 접기")
+    print("    가위 (Scissors) - 검지+중지")
+    print("   보 (Paper)      - 모두 펴기")
+    print("   총 (Gun)        - 엄지+검지")
+    print("   불사조 (Phoenix) - 엄지+검지+새끼")
+    print("\n종료: 'q' 또는 ESC\n")
     
     # 안정화 버퍼
     stability = StabilityBuffer(window_size=10, threshold=7)
@@ -305,7 +305,7 @@ def main():
     
     cap.release()
     cv2.destroyAllWindows()
-    print("\n✅ 종료되었습니다.")
+    print("\n종료되었습니다.")
 
 
 if __name__ == "__main__":

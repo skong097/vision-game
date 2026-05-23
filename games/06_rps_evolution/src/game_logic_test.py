@@ -165,7 +165,7 @@ class RPSEvolutionGame:
     def setup(self):
         self.cap = cv2.VideoCapture(0)
         if not self.cap.isOpened():
-            print("❌ 카메라를 열 수 없습니다.")
+            print("카메라를 열 수 없습니다.")
             return False
         self.cap.set(cv2.CAP_PROP_FRAME_WIDTH, 1280)
         self.cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 720)
@@ -199,15 +199,15 @@ class RPSEvolutionGame:
         if self.phase == GamePhase.DIFFICULTY_SELECT:
             if key == ord('1'):
                 self.ai_player = AIPlayer(difficulty="easy")
-                print(f"🤖 난이도: EASY")
+                print(f"난이도: EASY")
                 self.change_phase(GamePhase.READY)
             elif key == ord('2'):
                 self.ai_player = AIPlayer(difficulty="normal")
-                print(f"🤖 난이도: NORMAL")
+                print(f"난이도: NORMAL")
                 self.change_phase(GamePhase.READY)
             elif key == ord('3'):
                 self.ai_player = AIPlayer(difficulty="hard")
-                print(f"🤖 난이도: HARD")
+                print(f"난이도: HARD")
                 self.change_phase(GamePhase.READY)
         
         elif self.phase == GamePhase.READY:
@@ -220,7 +220,7 @@ class RPSEvolutionGame:
                 self.game_state.reset()
                 self.ai_player.reset()
                 self.stability.reset()
-                print("\n🔄 게임 재시작!")
+                print("\n게임 재시작!")
                 self.change_phase(GamePhase.READY)
         
         return True
@@ -245,12 +245,12 @@ class RPSEvolutionGame:
                 if confirmed != "unknown":
                     self.user_shape = confirmed
                     self.ai_shape = self.ai_player.choose_shape()
-                    print(f"  👤 사용자: {SHAPE_DISPLAY[self.user_shape]}")
-                    print(f"  🤖 AI:     {SHAPE_DISPLAY[self.ai_shape]}")
+                    print(f"  사용자: {SHAPE_DISPLAY[self.user_shape]}")
+                    print(f"  AI:     {SHAPE_DISPLAY[self.ai_shape]}")
                     self.change_phase(GamePhase.REVEAL)
                 else:
                     # 인식 실패 → 재시도
-                    print("  ⚠️  손 모양 인식 실패. 다시 시도합니다.")
+                    print("   손 모양 인식 실패. 다시 시도합니다.")
                     self.change_phase(GamePhase.COUNTDOWN)
         
         elif self.phase == GamePhase.REVEAL:
@@ -264,9 +264,9 @@ class RPSEvolutionGame:
                 
                 # 결과 출력
                 result_emoji = {
-                    "user_win": "🎉 승리!",
-                    "ai_win": "😢 패배",
-                    "draw": "🤝 무승부"
+                    "user_win": "승리!",
+                    "ai_win": "패배",
+                    "draw": "무승부"
                 }
                 print(f"  → {result_emoji[round_data['result']]} "
                       f"(점수 {round_data['user_score']}:{round_data['ai_score']})")
@@ -280,9 +280,9 @@ class RPSEvolutionGame:
                     winner = self.round_result["winner"]
                     print(f"\n{'='*40}")
                     if winner == "user":
-                        print("🏆 게임 우승! 쿠폰 발급!")
+                        print("게임 우승! 쿠폰 발급!")
                     else:
-                        print("😢 게임 패배. 다시 도전하세요!")
+                        print("게임 패배. 다시 도전하세요!")
                     print(f"{'='*40}")
                     self.change_phase(GamePhase.GAME_OVER)
                 else:
@@ -394,7 +394,7 @@ class RPSEvolutionGame:
             return
         
         print("\n" + "=" * 50)
-        print("🎮 PlayWait - 가위바위보 진화 (RPS Evolution)")
+        print("PlayWait - 가위바위보 진화 (RPS Evolution)")
         print("=" * 50)
         print("\n[1] EASY  [2] NORMAL  [3] HARD - 난이도 선택")
         print("[SPACE] - 라운드 시작")
@@ -462,7 +462,7 @@ class RPSEvolutionGame:
         if self.hands:
             self.hands.close()
         cv2.destroyAllWindows()
-        print("\n✅ 게임 종료")
+        print("\n게임 종료")
 
 
 # ============================================================

@@ -55,10 +55,10 @@ def find_korean_font():
 KOREAN_FONT_PATH = find_korean_font()
 
 if KOREAN_FONT_PATH is None:
-    print("⚠️  한글 폰트를 찾을 수 없습니다.")
+    print(" 한글 폰트를 찾을 수 없습니다.")
     print("   Linux: sudo apt install fonts-nanum")
 else:
-    print(f"✅ 한글 폰트 로드: {KOREAN_FONT_PATH}")
+    print(f"한글 폰트 로드: {KOREAN_FONT_PATH}")
 
 
 # ============================================================

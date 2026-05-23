@@ -28,10 +28,10 @@ try:
     pygame.mixer.pre_init(frequency=44100, size=-16, channels=2, buffer=512)
     pygame.mixer.init()
     PYGAME_AVAILABLE = True
-    print("✅ pygame 사운드 시스템 초기화 완료")
+    print("pygame 사운드 시스템 초기화 완료")
 except Exception as e:
     PYGAME_AVAILABLE = False
-    print(f"⚠️  pygame 초기화 실패: {e}")
+    print(f" pygame 초기화 실패: {e}")
     print("   → 사운드 없이 진행됩니다.")
 
 
@@ -70,14 +70,14 @@ class SoundManager:
                     self.sounds[sound_name] = sound
                     loaded_count += 1
                 except pygame.error as e:
-                    print(f"⚠️  '{filename}' 로드 실패: {e}")
+                    print(f" '{filename}' 로드 실패: {e}")
                     missing.append(filename)
             else:
                 missing.append(filename)
         
         # 로드 결과 출력
         total = len(theme.SOUND_FILES)
-        print(f"🎵 사운드 로드: {loaded_count}/{total}")
+        print(f"사운드 로드: {loaded_count}/{total}")
         
         if missing:
             print(f"   누락된 파일 ({len(missing)}개):")
@@ -95,7 +95,7 @@ class SoundManager:
         """
         # 폴백: 사운드 없으면 콘솔 출력
         if not self.enabled or sound_name not in self.sounds:
-            print(f"  [♪ {sound_name}]")
+            print(f"  [{sound_name}]")
             return
         
         try:
@@ -103,7 +103,7 @@ class SoundManager:
             sound.set_volume(max(0.0, min(1.0, volume)))
             sound.play()
         except Exception as e:
-            print(f"⚠️  '{sound_name}' 재생 실패: {e}")
+            print(f" '{sound_name}' 재생 실패: {e}")
     
     def stop_all(self):
         """모든 사운드 즉시 정지"""
@@ -145,11 +145,11 @@ def _self_test():
     ]
     
     for sound_name, desc in test_sequence:
-        print(f"\n▶️  {desc} ({sound_name})")
+        print(f"\n▶ {desc} ({sound_name})")
         sm.play(sound_name)
         time.sleep(1.5)  # 사운드 끝나기 대기
     
-    print("\n✅ 테스트 완료")
+    print("\n테스트 완료")
     sm.cleanup()
 
 
