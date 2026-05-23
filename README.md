@@ -76,4 +76,4 @@ python -m games.06_rps_evolution.src.game
 
 ## 📄 라이선스
 
-TBD
+MIT License — 자세한 내용은 [LICENSE](LICENSE) 파일 참고.
