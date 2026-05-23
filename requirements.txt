@@ -1,0 +1,30 @@
+# Vision AI
+mediapipe>=0.10.0
+ultralytics>=8.0.0
+opencv-python>=4.8.0
+numpy>=1.24.0
+
+# Backend
+fastapi>=0.110.0
+uvicorn[standard]>=0.27.0
+pydantic>=2.0.0
+sqlalchemy>=2.0.0
+redis>=5.0.0
+psycopg2-binary>=2.9.0
+
+# Utilities
+python-dotenv>=1.0.0
+qrcode>=7.4.0
+Pillow>=10.0.0
+pyyaml>=6.0
+
+# Audio (optional - for sound effects)
+pygame>=2.5.0
+
+# Development
+pytest>=7.4.0
+pytest-asyncio>=0.23.0
+black>=24.0.0
+ruff>=0.3.0
+ipykernel>=6.29.0
+jupyter>=1.0.0

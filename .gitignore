@@ -1,0 +1,78 @@
+# --- Python ---
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+**/.venv/
+
+# Distribution / packaging
+build/
+dist/
+*.egg-info/
+*.egg
+*.whl
+
+# --- Caches & test ---
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.cache/
+.coverage
+htmlcov/
+.tox/
+
+# --- IDE / OS ---
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# --- Secrets / env ---
+.env
+.env.*
+*.env
+secrets/
+credentials.json
+*.key
+*.pem
+
+# --- Models / weights (download on demand) ---
+*.pt
+*.pth
+*.onnx
+*.safetensors
+*.h5
+*.pkl
+*.weights
+
+# --- Generated assets / data ---
+*.log
+logs/
+output/
+runs/
+captures/
+
+# --- ROS2 colcon build artifacts (if mixed in) ---
+COLCON_IGNORE
+install/
+log/
+local_setup.*
+_local_setup_util_*
+
+# --- Misc large media (downloaded zips) ---
+*.zip
+*.tar
+*.tar.gz
+*.7z
+
+# --- Notebook checkpoints ---
+.ipynb_checkpoints/
