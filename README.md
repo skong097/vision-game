@@ -13,16 +13,16 @@ PlayWait는 식당/카페 대기시간을 활용한 **B2B2C AI 게임 플랫폼*
 
 | # | 게임명 | 기술 | 난이도 |
 |---|--------|------|--------|
-| 1 | 카페 닌자 | MediaPipe Hands + YOLO | |
-| 2 | 표정 미러링 챌린지 | MediaPipe Face Mesh | |
-| 3 | AR 보물찾기 | YOLO + AR | |
-| 4 | K-Pop 랜덤 댄스 | MediaPipe Pose | |
-| 5 | 고요 속의 외침 | Pose + Hands + LLM | |
-| 6 | 가위바위보 진화 | MediaPipe Hands | |
-| 7 | 스피드 카운터 | MediaPipe Hands | |
-| 8 | 좀비 피하기 (할로윈) | Pose + YOLO | |
-| 9 | 산타 선물 받기 (X-mas) | MediaPipe Hands | |
-| 10 | 커플 싱크 (발렌타인) | Face + Pose 멀티 | |
+| 1 | 카페 닌자 | MediaPipe Hands + YOLO | 보통 |
+| 2 | 표정 미러링 챌린지 | MediaPipe Face Mesh | 보통 |
+| 3 | AR 보물찾기 | YOLO + AR | 매우 어려움 |
+| 4 | K-Pop 랜덤 댄스 | MediaPipe Pose | 어려움 |
+| 5 | 고요 속의 외침 | Pose + Hands + LLM | 매우 어려움 |
+| 6 | 가위바위보 진화 | MediaPipe Hands | 매우 쉬움 |
+| 7 | 스피드 카운터 | MediaPipe Hands | 쉬움 |
+| 8 | 좀비 피하기 (할로윈) | Pose + YOLO | 어려움 |
+| 9 | 산타 선물 받기 (X-mas) | MediaPipe Hands | 보통 |
+| 10 | 커플 싱크 (발렌타인) | Face + Pose 멀티 | 어려움 |
 
 ## 디렉토리 구조
 
