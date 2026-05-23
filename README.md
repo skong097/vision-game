@@ -53,10 +53,6 @@ pip install -r requirements.txt
 python -m games.06_rps_evolution.src.game
 ```
 
-## 개발 로드맵
-
-10주 계획. 매주 1게임씩 개발.
-자세한 일정은 `docs/design/roadmap.md` 참고.
 
 ## 기술 스택
 
